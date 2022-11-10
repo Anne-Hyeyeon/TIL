@@ -46,4 +46,27 @@ export default function App() {
 - reference가 무엇인가? 기본적으로 우리의 component의 어떤 부분을 선택할 수 있는 방법이다. (document.getElementById처럼)
 - react에 있는 모든 component는 reference element를 가지고 있다. (ref prop 이용 가능)
 - 쓰는 방법 : const 변수명 = useRef();  input 등에 ref 로 변수명 넣어주기.
-- 
+- reference는 {current: HTMLHeadingElement} 의 형식으로 값을 반환한다.
+
+###useRef 사용 예시
+```js
+import { useEffect, useRef, useState } from "react";
+import "./styles.css";
+
+export default function App() {
+  const potato = useRef();
+  setTimeout(() => potato.current.focus(), 5000);
+  return (
+    <div className="App">
+      <h1>This is useClick hook!</h1>
+      <input ref={potato} placeholder="lalala" />
+    </div>
+  );
+}
+```
+
+- useEffect는 사실 componentDidMount상태에서 동작한다. 
+- useEffect안에  function을 넣으면 componentDidMount, componentDidUpdate 때 호출된다. (deps가 호출되지 않는다면) 
+- function을 리턴받았다면, 그 func는 componentWillunMount로부터 호출된거다. component가 mount가 되면, eventlistener가 추가될거고, deps가 없기 때문에 이것은 영원하다. 여기에 deps를 넣지 않고 없애버리면 매번 update될때마다 eventListener가 추가될것이다. 따라서 []을 꼭 넣어줘야 한다. (componentDidMount 일 때 한 번만 실행됨.) 마지막 func는 componentWillUnMount때 호출된다. 
+- component가 mount 되지 않았을 땐 eventListner가 배치되지 않도록 하자!
+- useEffect에서 return한 함수는 componentWillUnmount 때 호출된다.
