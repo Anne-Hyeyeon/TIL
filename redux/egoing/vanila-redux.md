@@ -54,3 +54,82 @@
 - 크롬 개발자 도구 리덕스 ! 각각의 요소 누르면 걔네한테 그동안 어떤 변화가 있었는지 확인할 수 있다.
 - js 디버거는 현재의 상태를 보고, redux 를 이용하면 각각의 변화가 생겼을 때, 어떤 상태인지를 볼 수 있다.  (시간 여행)
 - 파일로 받은 후 임포트해주면 설정을 그대로~쓸 수 있다!
+
+## 4. Redux가 없다면
+### 얼마나 불편한지 함 보이소~
+```html
+<html>
+    <body>
+        <style>
+                    .container {
+            border: 5px solid black;
+            padding: 1rem;
+            margin-bottom:1rem;
+        }
+        body{
+            margin:1rem;
+        }
+        </style>
+        <h1>Without redux</h1>
+        <div id="red"></div>
+        <div id="green"></div>
+        <div id="blue"></div>
+        
+        <script>
+function red(){
+    document.querySelector('#red').innerHTML = `
+        <div class="container" id="component_red" style="background-color:yellow">
+            <h1>red</h1>
+            <input type="button" value="fire" onclick="
+            document.querySelector('#component_red').style.backgroundColor = 'red';
+            document.querySelector('#component_green').style.backgroundColor = 'red';
+            document.querySelector('#component_blue').style.backgroundColor = 'green';
+            ">
+        </div>
+    `;
+}
+red();
+function green(){
+    document.querySelector('#green').innerHTML = `
+        <div class="container" id="component_green" style="background-color:yellow">
+            <h1>green</h1>
+            <input type="button" value="fire" onclick="
+            document.querySelector('#component_red').style.backgroundColor = 'green';
+            document.querySelector('#component_green').style.backgroundColor = 'green';
+            document.querySelector('#component_blue').style.backgroundColor = 'green';
+            ">
+        </div>
+    `;
+}
+green();
+function blue(){
+    document.querySelector('#blue').innerHTML = `
+        <div class="container" id="component_blue" style="background-color:yellow">
+            <h1>blue</h1>
+            <input type="button" value="fire" onclick="
+            document.querySelector('#component_red').style.backgroundColor = 'blue';
+            document.querySelector('#component_green').style.backgroundColor = 'blue';
+            document.querySelector('#component_blue').style.backgroundColor = 'blue';
+            ">
+        </div>
+    `;
+}
+blue();
+        </script>
+    </body>
+</html>
+```
+
+## 5.1 Redux의 적용 : store 생성
+### 리덕스 설치하기
+- 바닐라 자바스크립트 환경의 경우, 검색엔진에서 cdn redux 검색 후 붙여넣기
+- https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.js (CDN)
+- 리덕스를 이용한다? 스토어를 만든 후, 스토어의 상태를 바꾸는 게 핵심이다.
+- 스토얼르 만들면 state가 생기고, reducer라는 함수를 만들어 store에 주입해주는 게 첫 번째 단계다.
+- reducer는 state값을 변형시킨 후 다시 return해주는 함수
+- store는 은행, dispatch는 창구 직원, reducer는 은행 장부
+``` js
+var store = Redux.createStore(reducer);
+```
+- 스토어가 전역 변수에 저장됨
+- state에 있는 값을 가져오고 싶다면? getState 사용
