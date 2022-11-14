@@ -133,3 +133,4 @@ var store = Redux.createStore(reducer);
 ```
 - 스토어가 전역 변수에 저장됨
 - state에 있는 값을 가져오고 싶다면? getState 사용
+- 이렇게 생각해보면 어떨까? reducer는 요리사, dispatch()는 종업원, action은 메뉴, component는 고객 :)
