@@ -81,6 +81,7 @@ console.log(`findIndex: ${findIndex}`);
         });
       });
     }
+```
  - I added a new condition that distinguishes whether the value of "findIndex" is "-1" or not.
  - As a result, the "splice" method now only executes when the value of "findIndex" is not "-1," preventing it from removing unrelated items.
  - Overall, this modification ensures that the deletion function works properly and removes the intended item only.
