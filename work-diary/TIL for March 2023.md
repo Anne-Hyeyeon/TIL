@@ -86,4 +86,35 @@ console.log(`findIndex: ${findIndex}`);
  - As a result, the "splice" method now only executes when the value of "findIndex" is not "-1," preventing it from removing unrelated items.
  - Overall, this modification ensures that the deletion function works properly and removes the intended item only.
  
+# 2023-03-17
+## A parameter with the REST syntax 
+- A parameter with the REST syntax in JavaScript is denoted by three dots (...) followed by a parameter name.
+- 
+```js
+function sum(a: number, ...nums: number[]): number {
+  const totalOfNums = 0;
+  for (let key in nums) {
+    totalOfNums += nums[key];
+  }
+  return a + totalOfNums;
+}
+```
+-  It allows you to represent an `indefinite number of arguments` as an array.
+-  When a function is called with arguments, the REST parameter takes in all the remaining arguments after the other parameters have been assigned.
+```js
+function myFunction(a, b, ...rest) {
+  console.log(`a = ${a}`);
+  console.log(`b = ${b}`);
+  console.log(`rest = ${rest}`);
+}
 
+myFunction(1, 2, 3, 4, 5);
+
+```
+- The output of the above code will be:
+```css
+a = 1
+b = 2
+rest = 3,4,5
+```
+- The REST parameter is useful when you need to work with a varying number of arguments in a function.
