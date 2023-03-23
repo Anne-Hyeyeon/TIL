@@ -89,7 +89,6 @@ console.log(`findIndex: ${findIndex}`);
 # 2023-03-17
 ## A parameter with the REST syntax 
 - A parameter with the REST syntax in JavaScript is denoted by three dots (...) followed by a parameter name.
-- 
 ```js
 function sum(a: number, ...nums: number[]): number {
   const totalOfNums = 0;
@@ -118,3 +117,34 @@ b = 2
 rest = 3,4,5
 ```
 - The REST parameter is useful when you need to work with a varying number of arguments in a function.
+
+# 2023-03-23
+## keyof in Typescript.
+- In TypeScript, the keyof keyword is used to **obtain a union type of all possible property keys of a given object type**
+- It allows you to capture the keys of an object in a type-safe way, enabling you to write code that ensures that property accesses are valid at `compile-time`, rather than at runtime
+
+```js
+interface Person {
+  name: string;
+  age: number;
+  email: string;
+}
+```
+- To obtain a union type of all possible property keys of the Person type, you can use the keyof keyword as follows:
+```js
+type PersonKeys = keyof Person; // "name" | "age" | "address"
+```
+- The resulting PersonKeys type would be a **union type** of the three property keys, 'name', 'age', and 'email'.
+- This type can then be used to enforce type safety when accessing properties of a Person object, as shown below:
+```js
+function getPersonProperty(person: Person, key: PersonKeys) {
+  return person[key]; // This is type-safe because the `key` argument is guaranteed to be a valid property key of `Person`.
+}
+
+const person: Person = { name: 'John Doe', age: 30, email: 'john.doe@example.com' };
+const name = getPersonProperty(person, 'name'); // This is valid because `'name'` is a valid property key of `Person`.
+const address = getPersonProperty(person, 'address'); // This will result in a compile-time error because `'address'` is not a property key of `Person`.
+```
+- In this example, the key parameter is restricted to the keys of the Person interface, so it can only be "name", "age", or "address". This helps us write more type-safe code.
+
+Overall, keyof is a powerful tool in TypeScript that allows us to work with object keys in a type-safe way.
