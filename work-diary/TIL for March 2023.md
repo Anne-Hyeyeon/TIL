@@ -150,20 +150,19 @@ const address = getPersonProperty(person, 'address'); // This will result in a c
 Overall, keyof is a powerful tool in TypeScript that allows us to work with object keys in a type-safe way.
 
 
+# 2023-03-28
+## typeof in Typescript.
+- `typeof` in TypeScript is an operator that returns the data type of a value or variable at runtime.
+- It is a type query operator that allows you to obtain the static type of a variable or value, as defined in your TypeScript code.
+- For example, you can use the typeof operator to obtain the data type of a variable like this:
 
-
-typeof in TypeScript is an operator that returns the data type of a value or variable at runtime. It is a type query operator that allows you to obtain the static type of a variable or value, as defined in your TypeScript code.
-
-For example, you can use the typeof operator to obtain the data type of a variable like this:
-
-typescript
-Copy code
+```ts
 const someValue = 10;
 console.log(typeof someValue); // Output: "number"
-You can also use typeof to create type guards that allow you to conditionally execute code based on the type of a variable. Here's an example:
+```
+- You can also use typeof to create type guards that allow you to conditionally execute code based on the type of a variable. Here's an example:
 
-typescript
-Copy code
+```ts
 function logValue(value: string | number) {
   if (typeof value === "string") {
     console.log("The value is a string: " + value);
@@ -173,7 +172,8 @@ function logValue(value: string | number) {
     console.log("The value is of an unknown type.");
   }
 }
-
 logValue("hello"); // Output: "The value is a string: hello"
 logValue(42); // Output: "The value is a number: 42"
-In this example, the typeof operator is used to determine whether the value parameter is a string or a number. Based on the result of the type check, the function prints a message to the console.
+```
+
+- In this example, the typeof operator is used to determine whether the value parameter is a string or a number. Based on the result of the type check, the function prints a message to the console.
