@@ -185,8 +185,8 @@ logValue(42); // Output: "The value is a number: 42"
 - TypeScript is a `superset of JavaScript`, which means it is an upgraded version of the language with added features. 
 - Some of the commonly used types in TypeScript include strings and numbers, among others. 
 - JavaScript, on the other hand, is not a type-sensitive language. When programming in JavaScript, there is no way to inform the computer whether a particular value is a string or a number.
-- While one might question the need for this, **understanding the type of a value beforehand is crucial in the world of computers. **
+- While one might question the need for this, **understanding the type of a value beforehand is crucial in the world of computers.**
 - We ourselves need to know the type of food we are about to eat to avoid choking. Similarly, just by receiving the type of a value beforehand, a program can increase its stability, and prevent bugs from occurring.
-- TypeScript also offers several additional features such as previewing, among others, which enhances **developer productivity. **
+- TypeScript also offers several additional features such as previewing, among others, which enhances **developer productivity.**
 - In fact, there are hardly any companies today that develop solely in JavaScript, as many are using TypeScript for their projects. 
 - While it is possible to develop programs in JavaScript alone, knowing TypeScript is essential for developing `stable web pages` and `improving employability.`
