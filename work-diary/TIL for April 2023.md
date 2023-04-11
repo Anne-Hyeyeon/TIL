@@ -63,7 +63,9 @@ React 등의 상태 관리 라이브러리를 사용하여 필터 정보를 상�
 
 # 2023-04-11
 ## 게시판 본문 아래에 나오는 게시글 목록 pagination에 오류 나오는 것 해결
-<img src="https://github.com/Anne-Hyeyeon/mystorage/blob/main/20230411_182847.png?raw=true" />
+### <img src="https://github.com/Anne-Hyeyeon/mystorage/blob/main/20230411_182847.png?raw=true" />
+
+###
 - 위와 같이, 본문 하단에 노출되는 게시글 목록에 문제가 있는 것이다. 위 사진은 예시일 뿐이다.
 - 필터가 걸려있지 않을 때는 문제가 없다. 하지만 **필터 조건**이 걸렸을 때 오류가 생긴다. 검색어랑 필터 조건이 생길 경우 Main(게시판 첫 페이지, 목록)에서 불러오는 rnum들이 모두 바뀌기 때문이다. 하지만 Detail(본문 페이지) 안에서 불러오는 데이터의 rnum들은 변하지 않아 문제가 생기는 것.
 - 본문 안에 있는 게시글 목록, 페이지네이션은 본문 안에서 불러오는 rnum에 따라 정해지기 때문임.
