@@ -48,7 +48,7 @@ React 등의 상태 관리 라이브러리를 사용하여 필터 정보를 상�
 
 
 # 2023-04-07 
-## 관리자가 아닌 일반사용자 로그인 시, '그룹설정'이 안 표시되는 문제 해결
+## (게시판 아님) 관리자가 아닌 일반사용자 로그인 시, '그룹설정'이 안 표시되는 문제 해결
 - Setting에서 특정 그룹에 대한 설정을 '제한'으로 걸어 두면, 관리자가 아닌 일반 사용자한테는 '그룹 설정' 이라는 텍스트가 안 뜨고, 해당 그룹의 설정을 바꿀 수 없게 된다.
 - 문제 상황 : 그룹 별로 '제한'을 각각 설정할 수 있음에도 불구하고, 일반 사용자 로그인 시 '그룹 설정'이라는 텍스트가 모두 사라져 있다. '제한'이 걸려있지 않은 그룹의 경우, '그룹 설정'이라는 텍스트가 떠야 한다.
 
@@ -63,7 +63,7 @@ React 등의 상태 관리 라이브러리를 사용하여 필터 정보를 상�
 
 # 2023-04-11
 ## 게시판 본문 아래에 나오는 게시글 목록 pagination에 오류 나오는 것 해결
-### <img src="https://github.com/Anne-Hyeyeon/mystorage/blob/main/20230411_182847.png?raw=true" />
+### <img src="https://github.com/Anne-Hyeyeon/mystorage/blob/main/20230411_182847.png?raw=true" alt="screenshot" />
 
 ###
 - 위와 같이, 본문 하단에 노출되는 게시글 목록에 문제가 있는 것이다. 위 사진은 예시일 뿐이다.
@@ -75,3 +75,29 @@ React 등의 상태 관리 라이브러리를 사용하여 필터 정보를 상�
  3) 원래 detail get값엔 파라미터가 따로 없었는데, 검색 필터 (위에서 전역 상태관리하게 된) 값을 가지고 와 파라미터로 쏴 줬더니 rnum이 똑바로 들어오게 됨.
  4) 전체 게시글 개수에서 rnum을 뺀 다음, 오프셋으로 나눈 값을 Math.floor해서 페이지 값 구함. 정상 작동함
       
+      
+# 2023-04-1
+## 게시판 - lodash isEqual을 사용할 때, 특정 요소는 빼고 비교하는 방법이 있을까?
+###
+<img src="https://github.com/Anne-Hyeyeon/mystorage/blob/main/search.png?raw=true" alt="example" />
+- 게시판의 '필터 해제'버튼은, lodash의 isEqual을 이용해서 구현된 것이다. 게시판 메인 state에는 두 개의 값이 있는데, 원래 필터값은 `initFilter`에 담기고 변경된 필터값은 `filter`에 담긴다. 
+- 자세히 설명 -> 우선 사용자가 필터 조건들을 클릭하면 onChange를 통해 값이 `filter`에 들어간다.
+- 필터 설정 후 '검색'버튼을 누르면 filter값이 `initFilter`값 안에 들어간다. (만약, 직전 설정된 필터값이 없으면 initialState의 필터값이 들어감.)
+- 이때, 변경된 값을 탐지해서 '필터 해제'버튼을 활성화시킨다. 변경된 값이 있을 경우에만 '필터 해제'활성화. 이를 위해 isEqual(initFilter, filter) 함수를 사용한다.
+
+### 문제 - 특정 요소를 빼고 비교를 해야 할 경우
+- 사진에 보면 게시글 필터 중에는 '제목', '본문'이 있는데, initFilter값과 filter값을 비교할 때 저 '제목', '본문'체크박스 조건은 제외하고 비교하고자 함. (실제로 그런 기능이 필요한 건 아니지만, 혹시 **isEqual로 비교하는 중 특정 조건을 빼야 된다면 어떻게 해야 될까?** 라고 고민하다가...)
+- 정답은 특정 요소를 제외하고 나머지를 비교하는 함수를 만드는 것!
+- 참고로 '제목' '본문' 여부는 keywordType이라는 변수로 관리되고 있음.
+```js
+const isEqualWithoutKeywordType = (initFilter: Filter, filter: Filter) => {
+  const { keywordType: k1, ...restInitFilter } = initFilter; 
+  const { keywordType: k2, ...restFilter } = filter;
+  return isEqual(restInitFilter, restFilter);
+};
+```
+- initFilter와 filter를 받아와서 값 할당, 여기서 keyword_type를 제외한 나머지 값을 추출할 수 있다. keyword_type값을 뽑아서 k1, k2에 store 한 다음 나머지 값만 이용하면 됨 
+- 문제는... 여기서 keywordType을 저장한 k1, k2가 사용되지 않아 노란색 줄이 쳐진다는 것
+- 해결 -> k1, k2 저장 대신 `_` 사용하려고 했으나 typeScript 문법상 문제가 생김.
+- 노란줄 없이 원하는 값 추출하는 법... 조금 더 고민해 보아야겠다.
+###
