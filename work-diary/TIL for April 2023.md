@@ -101,3 +101,42 @@ const isEqualWithoutKeywordType = (initFilter: Filter, filter: Filter) => {
 - 해결 -> k1, k2 저장 대신 `_` 사용하려고 했으나 typeScript 문법상 문제가 생김.
 - 노란줄 없이 원하는 값 추출하는 법... 조금 더 고민해 보아야겠다.
 ###
+
+# 2023-04-14
+## Record Type of TypeScript
+### What is Record Type? GPT의 답변
+```
+Record<string, T> is a type alias in TypeScript that defines an object type with string keys and values of type T. Essentially, it creates a type that represents an object where the keys are strings and the values can be of any type T.
+```
+- Record<string, T>는 타입스크립트에서 string key와 T type 타입을 가지고 있는 object의 별칭이다. 본질적으로, 이것은 key가 string이고 value가 T인 object라는 것을 나타내는 type를 생성한다.
+```
+For example, Record<string, number> would define an object where all the keys are strings, but the values are numbers. It can be used to create a strongly typed object when the keys are not known ahead of time, such as when parsing JSON data.
+```
+- 예를 들면, Record<string, number> 는 모든 key가 string이고 value가 numbers인 object를 정의하게 된다. 그것은 JSON data를 파싱할 때처럼 key를 미리 알 수 ㅇ벗을 때, strongly typed된 object를 생성하는 데 쓰일 수 있다. 
+- 여기서 strongly typed 됐다고 함은 ->  Any attempt to pass a wrong kind of parameter as an argument, or to assign a value to a variable that is not implicitly convertible, will generate a compilation error.  
+
+```js
+type User = {
+  name: string;
+  age: number;
+  email: string;
+};
+
+type UserDictionary = Record<string, User>;
+
+const users: UserDictionary = {
+  "user1": { name: "John", age: 25, email: "john@example.com" },
+  "user2": { name: "Jane", age: 30, email: "jane@example.com" }
+};
+
+console.log(users["user1"].name); // Output: "John"
+console.log(users["user2"].age); // Output: 30
+```
+
+### What is difference between Record Type and Index Signature? Record 타입과 Index Signature의 차이점
+#### 두 개 다 object의 동적인 key의 type을 정의하는데 쓰인다. 차이점은 다음과 같다. 
+1. Syntax(구문) : Record Type의 구문이 Index Signature에 비해 더 정확하고 가독성이 좋다.
+2. Usability(사용성) : Record Type이 더 강력한데다가, object의 모든 key들을 특정 타입으로 지정하게 하는 추가 기능을 제공한다. 하지만 Index Signature의 경우 object의 key와 value 에 대한 타입만 설정하게 한다.
+3. Readability(가독성) : Record Type은 동적인 키를 가지고 있는 object type을 정의하는 데 있어서 Self-documenting way(자기 설명적인 방식으로 코드를 작성하는 것 : 코드 자체가 정보를 제공하여, 그 의도와 작동 방식을 이해할 수 있도록 하는 것. 코드 내부에서 변수, 함수, 클래스, 메서드 등의 이름을 명확하고 직관적으로 지정하고, 주석 등을 최소화하여 `코드 자체`가 목적을 잘 설명하도록 하는 것.)인데다가 가독성을 좋게 한다. 
+4. Compatibility(호환성) : Record Type은 Partial, Required, and Pick 등의 built-it TypeScript 타입들과 호환성이 좋다.
+- 결론적으로, dynamic keys를 가지고 있는 object의 type을 지정하는 데 있어서는 Record Type이 더 좋은 선택이라고 할 수 있다. 왜냐하면 그것은 해독하고 유지하기에 더 쉬운 특징들을 제공하기 때문이다. 그러나, 만약 다이나믹 key에 대한 더 세밀한 타입 컨트롤이 필요하다면, index signature를 사용하는 게 더 나을 것이다.
