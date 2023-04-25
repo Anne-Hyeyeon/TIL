@@ -121,4 +121,42 @@ lifespan = true;
 
 ## 3.4 엄격한 null 검사
 
+### 3.4.1 십억 달러의 실수
+
+- `십억 달러의 실수` : 다른 타입이 필요함에도 불구하고 `null` 값을 사용하도록 허용하는 타입 시스템을 지칭할 때 쓰는 용어.
+- null 참조의 발명으로 인해 발생한 취약성 및 시스템 충돌만 해도 십억 달러정도 된다는 뜻에서 나온 용어다.
 - 최신 프로그래밍 언어의 큰 변화 -> 잠재적으로 정의되지 않는 undefined 값으로 작업할 떄 더욱 두드러짐.
+- null과 undefined 값으로 인한 오류를 막아주기만해도 프로그램 안정화에 큰 도움이 됨.
+- 타입스크립트는 엄격한 null 검사를 시행해 충돌을 방지하고 실수를 제거할 수 있음.
+
+### 3.4.2 참 검사를 통한 내로잉
+
+- 타입스크립트는 잠재적 값 중 **truthy**로 확인된 일부에 한해서만 변수의 타입을 좁힐 수 있다.
+
+```ts
+// 여기서 geneticist는 string | undefined다.
+if (geneticist) {
+  geneticist.toUpperCase(); // Ok: string
+}
+
+geneticist.toUpperCase();
+// Error: Object is possiblt 'undefined'.
+```
+
+- if 문을 통해 변수의 타입을 좁힐 수 있는 건 truthy 값인 string밖에 없다.
+
+```ts
+let biologist = Math.random() > 0.5 && "Hyeyeon";
+
+if (biologist) {
+  biologist; // string
+} else {
+  biologist; //string | false
+}
+```
+
+- 위 코드에서 if 문 안에 있는 biologist의 타입은 string, else 블록문 안에 있는 bilologist의 타입은 false | string 이다.
+
+1.  Math.random() > 0.5가 참일 경우 : biologist 변수에는 문자열 "Hyeyeon"이 할당된다. 이때, biologist 변수는 문자열 타입을 가지며, 조건식은 참(true)으로 평가된다. 따라서 if 블록이 실행되고, biologist 변수는 그대로 문자열 타입을 유지한다.
+2.  Math.random() > 0.5가 거짓일 경우 : biologist 변수에는 falsy한 값인 false가 할당된다. 이때, biologist 변수는 불리언(Boolean) 타입이며, 조건식은 거짓(false)으로 평가된다. 따라서 else 블록이 실행되고, biologist 변수는 그대로 불리언(Boolean) 타입을 유지한다.
+3.  biologist 변수가 초기화되지 않은 경우 : biologist 변수의 값은 undefined가 됩니다. 이때, biologist 변수는 undefined 타입을 가지며, 조건식은 거짓(false)으로 평가된다. 따라서 else 블록이 실행되고, biologist 변수는 그대로 undefined 타입을 유지한다.
