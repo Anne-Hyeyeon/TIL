@@ -157,6 +157,6 @@ if (biologist) {
 
 - 위 코드에서 if 문 안에 있는 biologist의 타입은 string, else 블록문 안에 있는 bilologist의 타입은 false | string 이다.
 
-1.  Math.random() > 0.5가 참일 경우 : biologist 변수에는 문자열 "Hyeyeon"이 할당된다. 이때, biologist 변수는 문자열 타입을 가지며, 조건식은 참(true)으로 평가된다. 따라서 if 블록이 실행되고, biologist 변수는 그대로 문자열 타입을 유지한다.
-2.  Math.random() > 0.5가 거짓일 경우 : biologist 변수에는 falsy한 값인 false가 할당된다. 이때, biologist 변수는 불리언(Boolean) 타입이며, 조건식은 거짓(false)으로 평가된다. 따라서 else 블록이 실행되고, biologist 변수는 그대로 불리언(Boolean) 타입을 유지한다.
-3.  biologist 변수가 초기화되지 않은 경우 : biologist 변수의 값은 undefined가 됩니다. 이때, biologist 변수는 undefined 타입을 가지며, 조건식은 거짓(false)으로 평가된다. 따라서 else 블록이 실행되고, biologist 변수는 그대로 undefined 타입을 유지한다.
+1.  `Math.random() > 0.5가 참일 경우` : biologist 변수에는 문자열 "Hyeyeon"이 할당된다. 이때, biologist 변수는 문자열 타입을 가지며, 조건식은 참(true)으로 평가된다. 따라서 if 블록이 실행되고, biologist 변수는 그대로 문자열 타입을 유지한다.
+2.  `Math.random() > 0.5가 거짓일 경우` : biologist 변수에는 falsy한 값인 false가 할당된다. 이때, biologist 변수는 불리언(Boolean) 타입이며, 조건식은 거짓(false)으로 평가된다. 따라서 else 블록이 실행되고, biologist 변수는 그대로 불리언(Boolean) 타입을 유지한다.
+3.  `biologist 변수가 초기화되지 않은 경우` : biologist 변수의 값은 undefined가 된다. 이때, biologist 변수는 undefined 타입을 가지며, 조건식은 거짓(false)으로 평가된다. 따라서 else 블록이 실행되고, biologist 변수는 그대로 undefined 타입을 유지한다.
