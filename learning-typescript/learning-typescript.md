@@ -157,6 +157,47 @@ if (biologist) {
 
 - 위 코드에서 if 문 안에 있는 biologist의 타입은 string, else 블록문 안에 있는 bilologist의 타입은 false | string 이다.
 
-1.  `Math.random() > 0.5가 참일 경우` : biologist 변수에는 문자열 "Hyeyeon"이 할당된다. 이때, biologist 변수는 문자열 타입을 가지며, 조건식은 참(true)으로 평가된다. 따라서 if 블록이 실행되고, biologist 변수는 그대로 문자열 타입을 유지한다.
-2.  `Math.random() > 0.5가 거짓일 경우` : biologist 변수에는 falsy한 값인 false가 할당된다. 이때, biologist 변수는 불리언(Boolean) 타입이며, 조건식은 거짓(false)으로 평가된다. 따라서 else 블록이 실행되고, biologist 변수는 그대로 불리언(Boolean) 타입을 유지한다.
-3.  `biologist 변수가 초기화되지 않은 경우` : biologist 변수의 값은 undefined가 된다. 이때, biologist 변수는 undefined 타입을 가지며, 조건식은 거짓(false)으로 평가된다. 따라서 else 블록이 실행되고, biologist 변수는 그대로 undefined 타입을 유지한다.
+1.  Math.random() > 0.5가 참일 경우 : biologist 변수에는 문자열 "Hyeyeon"이 할당된다. 이때, biologist 변수는 문자열 타입을 가지며, 조건식은 참(true)으로 평가된다. 따라서 if 블록이 실행되고, biologist 변수는 그대로 문자열 타입을 유지한다.
+2.  Math.random() > 0.5가 거짓일 경우 : biologist 변수에는 falsy한 값인 false가 할당된다. 이때, biologist 변수는 불리언(Boolean) 타입이며, 조건식은 거짓(false)으로 평가된다. 따라서 else 블록이 실행되고, biologist 변수는 그대로 불리언(Boolean) 타입을 유지한다.
+3.  biologist 변수가 초기화되지 않은 경우 : biologist 변수의 값은 undefined가 됩니다. 이때, biologist 변수는 undefined 타입을 가지며, 조건식은 거짓(false)으로 평가된다. 따라서 else 블록이 실행되고, biologist 변수는 그대로 undefined 타입을 유지한다.
+
+### 3.4.3 초깃값이 없는 변수
+
+- 자바스크립트에서 초깃값이 없는 변수 -> 기본적으로 **undefined**가 된다.
+- 만약 undefined를 포함하지 않는 타입으로 변수를 선언한 다음, 값을 할당하기 전 사용하려고 시도하면 어떻게 될까?
+- 값이 할당되기 전 해당 변수를 사용하려고 시도하면 오류 메시지가 나타난다.
+
+```ts
+let mathematician = string;
+
+mathmatician?.length;
+// Error: Variable 'mathmatician' is used before being assigned.
+
+mathematician = "Mark Goldberg";
+mathematician.length; // Ok
+```
+
+- 만약 변수 타입에 undefined가 포함되어 있다면 오류는 보고되지 않는다. undefined의 경우 유효한 타입이기 때문에 사용 전에 정의할 필요가 없음을 타입스크립트에 나타낸다.
+
+## 3.5 타입 별칭 (Type Alias)
+
+- `타입 별칭` : 재사용하는 타입에 더 쉬운 이름을 할당하는 것.
+- **type 새로운 이름 = 타입** 형태를 가진다.
+- 타입 별칭은 파스칼 케이스(PascalCase)로 이름을 지정한다.
+- 타입 별칭은 타입 시스템의 복사해서 붙여넣기처럼 작동한다. 상당히 길었던 유니언 타입도 타입 별칭을 이용하면 축약할 수 있다. 가독성도 훨씬 좋아진다.
+
+### 3.5.1 타입 별칭은 자바스크립트가 아닙니다
+
+- 타입 별칭은 자바스크립트로 컴파일되지 않고 순전히 타입스크립트 시스템에만 존재한다.
+- 따라서 타입 별칭은 런타임 코드에서 참조할 수 없다. 런타임에 존재하지 않는 항목에 접근하려고 하면 타입 오류로 알려준다.
+
+```ts
+type SomeType = string | undefined;
+
+console.log(SomeType);
+// Error: 'SomeType' only refers to a type, but is being used as a value here.
+```
+
+### 3.5.2 타입 별칭 결합
+
+- 타입 별칭은 다른 타입 별칭을 참조할 수 있다.
