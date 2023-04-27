@@ -313,3 +313,323 @@ console.log(SomeType);
 ### 3.5.2 타입 별칭 결합
 
 - 타입 별칭은 다른 타입 별칭을 참조할 수 있다.
+
+# Chapter 4. 객체
+
+- 원시 타입은 사실 자바스크립트가 사용하는 복잡한 객체의 겉만 훑을 뿐이다.
+
+## 4.1 객체 타입
+
+- {} 구문을 사용해서 객체 리터럴을 생성했을 때, 타입스크립트는 해당 속성을 기반으로 새로운 객체 타입 또는 타입 형태를 고려하게 된다.
+- 생성된 객체 타입은 객체의 값과 `동일한 속성명`과 `동일한 원시타입`을 갖는다.
+- 값의 속성에 접근하기 위해서는 `value.멤버` 또는 `value['멤버']` 구문을 사용해야 한다.
+- null과 undefined를 제외한 모든 값은, 그 값에 대한 실제 타입의 멤버 집합을 가진다. 따라서 TS는 모든 값의 타입을 확인하기 위해 객체 타입을 이해해야 한다.
+  > 이 말은, JS에서 null과 undefined를 제외한 모든 값들은 자신이 가진 실제 데이터 타입에 따라 사용 가능한 멤버 함수와 속성들이 존재한다는 의미다. TS에서는 null과 undefined를 제외한 모든 값들이 객체 타입으로 간주되어, 다양한 멤버 함수와 속성을 가지게 된다. 예를 들면, 문자열(string) 데이터 타입의 값은 문자열에 대해서만 적용 가능한 다양한 내장 멤버 함수와 속성을 가지고 있다. 'toUpperCase()'와 같은 함수는 문자열에만 적용 가능한 함수다. TS에서는 값에 대해 다양한 멤버 함수와 속성을 제공하고, 이를 이용해 해당 값이 특정 타입임을 확인할 수 있다.
+
+### 4.1.1 객체 타입 선언
+
+- 객체의 타입을 **명시적으로** 선언하고 싶을 땐 어떻게 해야 할까? 타입이 선언된 객체와는 별도로 객체의 형태를 설명하는 방법이 필요하다.
+- 객체 타입은 필드 값 대신 타입을 사용해 설명한다.
+
+### 4.1.2 별칭 객체 타입
+
+- `{born: number, name: string}`같은 객체 타입을 작성하는 것 대신, 객체 타입에 타입 별칭을 할당해 사용하는 방법이 일반적이다.
+- 이는 타입스크립트의 오류 메시지를 좀더 직접적으로 읽기 쉽게 만드는 추가 이점이 있다.
+
+## 4.2 구조적 타이핑
+
+- 타입스크립트의 타입 시스템은 `구조적으로 타입화(structurally typed)`되어 있다.
+  > 구조적 타이핑이란 ? TS에서 값의 타입이 해당 값이 가진 `구조(구조체)`에 의해 결정된다는 것을 의미함.
+- 이름이 다른 두 개의 인터페이스가 있을 때, 해당 인터페이스들이 가진 구조가 동일하다면 같은 타입으로 간주함.
+- TS에서는 값의 타입이 이름이나 명시적으로 선언된 타입보다는, 해당 값이 가진 **구조**에 의해 결정됨.
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+interface Employee {
+  name: string;
+  age: number;
+  employeeId: number;
+}
+```
+
+- 위 두 개의 인터페이스는, 동일한 구조를 가지고 있으므로 같은 타입으로 취급이 된다.
+- 이러한 특징 때문에, 매개변수나 변수가 특정 타입으로 선언된다면 타입스크립트에 어떤 객체를 사용하든 해당 속성이 있다고 말해야 한다.
+
+> 덕 타이핑(duck typying) : 구조적 타이밍과 반대되는 개념. 덕 타이핑은 '오리처럼 보이고 오리처럼 꽥꽥거리면, 오리일 것이다`라는 문구에서 유래했다.
+
+- 타입스크립트에서 구조적 타이밍은 **정적 시스템이 타입을 검사하는 경우**다.
+- 덕 타이핑은 런타임에서 사용될 때까지 객체 타입을 검사하지 않는다.
+- 정리 : 자바스크립트는 **덕 타입**인 반면, 타입스크립트는 **구조적으로 타입화**된다.
+
+### 4.2.1 사용 검사
+
+- 객체 타입에 값을 제공할 때, 타입스크립트는 특정 값을 해당 객체에 할당할 수 있는지를 확인한다.
+- 이때 할당하는 값에는, 객체 타입의 필수 속성이 있어야 한다.
+- 객체 타입에 필요한 멤버가 객체에 없다면, TS는 오류를 발생시킨다.
+- 둘 사이에 일치하지 않는 타입도 허용되지 않는다. 객체 타입은 필수 속성 이름과, 속성이 예상되는 타입을 모두 지정하기 때문이다.
+
+### 4.2.2 초과 속성 검사
+
+- 변수가 객체 타입으로 선언되고, 초깃값에 객체 타입에서 **정의된 것보다 많은 필드**가 있다면 타입스크립트에서 타입 오류가 발생한다.
+- 하지만, **기존 객체 리터럴**을 사용하여 객체를 생성하는 경우에는 초과 속성 검사가 수행되지 않는다.
+
+```ts
+const person = {
+  name: "John",
+  age: 30,
+  gender: "male",
+};
+```
+
+- 위와 같이 person 객체가 이미 생성되어 있고
+
+```ts
+const john: Person = person;
+```
+
+- 위 객체를 Person 타입으로 선언된 변수에 할당할 때는, 초과 속성 검사가 수행되지 않는다.
+- 이런 방식으로 기존에 생성된 객체를 사용하여 타입 검사를 우회할 수 있다. 그러나, 이럴 때는 오류를 미리 방지할 수 없기 때문에 주의가 필요하다.
+
+### 4.2.3 중첩된 객체 타입
+
+- 타입스크립트의 객체 타입도, 타입 시스템에서 중첩된 객체 타입을 나타낼 수 있어야 한다.
+- 중첩된 객체 타입 예시
+
+```ts
+interface Address {
+  street: string;
+  city: string;
+}
+
+interface Person {
+  name: string;
+  age: number;
+  address: Address;
+}
+
+function printPerson(person: Person) {
+  console.log(`Name: ${person.name}, Age: ${person.age}`);
+  console.log(`Address: ${person.address.street}, ${person.address.city}`);
+}
+
+const john: Person = {
+  name: "John",
+  age: 30,
+  address: {
+    street: "123 Main St",
+    city: "Anytown",
+  },
+};
+
+printPerson(john);
+```
+
+- 위 코드에서, Person 객체 타입에서는 Address 객체 타입을 포함하고 있으며, printPerson 함수에서는 Person 타입을 인자로 받는다. john 변수는 Person 타입의 객체를 할당받으며, address 속성에서는 중첩된 Address 객체를 사용한다.
+- 이제 printPerson 함수를 호출할 때 john 변수를 전달하면, TypeScript는 john 변수가 Person 타입의 객체임을 인식하고, printPerson 함수에 전달될 수 있도록 한다. 함수 내부에서는 중첩된 객체 타입인 Address의 속성도 참조하여 출력한다.
+
+### 4.2.4 선택적 속성
+
+- 타입의 속성 애너테이션에서 : 앞에 ?를 추가하면, 선택적 속성임을 나타낼 수 있다.
+
+```ts
+interface User {
+  id: number;
+  name: string;
+  email?: string;
+}
+
+function getUserInfo(user: User) {
+  console.log(`User ID: ${user.id}, Name: ${user.name}`);
+  if (user.email) {
+    console.log(`Email: ${user.email}`);
+  }
+}
+
+const user1: User = {
+  id: 1,
+  name: "John",
+};
+
+const user2: User = {
+  id: 2,
+  name: "Jane",
+  email: "jane@example.com",
+};
+
+getUserInfo(user1); // User ID: 1, Name: John
+getUserInfo(user2); // User ID: 2, Name: Jane, Email: jane@example.com
+```
+
+> 선택적 속성과 undefined의 차이점 : ?를 사용해 선택적으로 선언된 속성은 존재하지 않아도 된다. 하지만 필수로 선언된 속성과 | undefined는 그 값이 undefined 일지라도 반드시 존재해야 한다.
+
+## 4.3 객체 타입 유니언
+
+### 4.3.1 유추된 객체 타입 유니언 (Type Inference)
+
+- TypeScript에서는 변수에 초기값이 할당될 경우, 해당 값을 바탕으로 타입을 유추하게 된다. 이때, 초기값이 여러 객체 타입 중 하나가 될 수 있는 경우, TypeScript는 해당 타입을 객체 타입 유니언(Object Type Union)으로 유추한다.
+
+```ts
+let myVariable = { name: "John", age: 30 };
+```
+
+- 위 코드에서 `myVariable` 변수에는 객체 리터럴이 할당되어 있다. 이 객체 리터럴은 name과 age 속성을 가지고 있으며, 이 속성들은 각각 string과 number 타입이다. 따라서 TypeScript는 myVariable 변수의 타입을 { name: string, age: number }으로 유추한다.
+- 그러나 다음과 같이 코드가 바뀐다면 어떻게 될까?
+
+```ts
+let myVariable = { name: "John", age: 30 };
+myVariable = { name: "Jane" };
+```
+
+- 위 코드에서는 myVariable 변수가 초기값으로 객체 리터럴을 할당받았지만, 나중에 다시 객체 리터럴을 할당받을 수도 있다.
+- 이때 TypeScript는 myVariable 변수의 타입을 객체 타입 유니언으로 유추한다.
+- 즉, myVariable 변수는 { name: string, age: number } 타입의 객체나 { name: string } 타입의 객체 중 하나가 될 수 있다는 것이다.
+- `객체 타입 유니언`은 TypeScript의 강력한 기능 중 하나이며, 여러 객체 타입을 통합해서 사용할 수 있도록 도와준다.
+
+### 4.3.2 명시된 객체 타입 유니언
+
+- 객체 타입의 조합을 명시하면, 객체 타입을 더 명확히 정의할 수 있다.
+- 명시적인 객체 유니언 타입(Object Type Union)은 여러 객체 타입을 합쳐서 하나의 타입으로 만들 때 사용된다. 객체 유니언 타입은 | 기호를 사용하여 표현된다.
+
+```js
+type Person = { name: string, age: number };
+type Employee = { name: string, department: string };
+
+let myVar: Person | Employee;
+```
+
+### 4.3.3 객체 타입 내로잉
+
+- 원시 타입 유니언처럼, 객체 타입 유니언 역시 특정 값을 사용하기 위해서는 타입을 좁혀서 사용할 필요가 있다.
+
+```ts
+type User = {
+  name: string;
+  age: number;
+};
+
+type Admin = {
+  name: string;
+  role: string;
+};
+
+type Person = User | Admin; // User와 Admin 타입으로 구성된 유니언 타입을 만든다.
+
+let person: Person = {
+  name: "John",
+  age: 30,
+};
+// Person 타입의 변수를 선언하고 초깃값을 할당한다. 이때, person 변수 타입은 Person 유니언 타입으로 추론된다. 이 변수에는 User 또는 Admin 객체가 들어갈 수 있다.
+
+console.log(person.role); // 오류: Property 'role' does not exist on type 'Person'.
+
+if ("role" in person) {
+  console.log(person.role); // OK: person이 Admin 타입일 때만 실행됩니다.
+}
+// Role 속성을 사용하기 위해 Person 타입을 Admin 타입으로 좁혀야 한다.
+```
+
+- 객체 유니언 타입 내로잉이란, 특정 속성이 존재하지 않을 수도 있기 때문에 해당 속성을 사용하기 전 타입을 좁혀주는 것을 말한다.
+- 참고로 타입스크립트는 if(person.role) 과 같은 방식으로 참 여부를 확인하는 것을 허용하지 않는다. 존재하지 않는 객체의 속성에 접근하려고 시도하면 타입 오류로 간주된다.
+
+### 4.3.4 판별된 유니언 (discriiminated union)
+
+- 유니언 타입에 속한 각 타입의 **구분자 역할을 하는 속성**을 추가하여 해당 속성의 값에 따라 타입을 판별하는 것을 말한다.
+- 타입 가드를 적용하여 더욱 정확한 타입 추론이 가능하다.
+
+```ts
+type Shape = { kind: "circle", radius: number } | { kind: "square", sideLength: number };
+
+function getArea(shape: Shape): number {
+  switch(shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2;
+    case "square":
+      return shape.sideLength ** 2;
+    default:
+      throw new Error("Invalid shape");
+```
+
+- 위 함수에서는 kind 속성을 판별자로 사용하여 입력받은 Shape 타입의 객체가 어떤 도형인지 판별하고 있다.
+- 따라서 타입 검사기는 Shape 타입에 대한 정확한 **타입 추론**을 할 수 있게 되고, 잘못된 속성에 접근할 가능성이 줄어들게 된다.
+- 여기서 객체의 타입을 가리키는 속성이 바로 판별값이다. 타입스크립트는 판별 속성을 사용해 타입 내로잉을 수행한다.
+
+## 4.4 교차 타입
+
+- 타입스크립트에서는 & 교차 타입을 이용해 여러 타입을 동시에 나타낼 수 있다.
+- 타입스크립트에서 `&`연산자는, 두 개 이상의 객체 타입을 교차시켜 하나의 타입으로 만드는 교차 타입을 만들 때 사용된다.
+- 일반족으로 여러 객체 타입을 별칭 객체 타입으로 결합해 새로운 타입을 생성한다.
+- 교차 타입은 유니언 타입과 결합이 가능하다.
+
+```ts
+type Person = {
+  name: string;
+  age: number;
+};
+
+type Employee = {
+  companyId: number;
+  role: string;
+};
+
+type PersonEmployee = Person & Employee;
+
+const personEmployee: PersonEmployee = {
+  name: "John",
+  age: 30,
+  companyId: 123,
+  role: "Manager",
+};
+```
+
+- 교차 타입은 더 복잡한 타입을 만들 때 유용하게 사용된다. 예를 들어, 위 예시에서 Person과 Employee 타입의 각각 다른 하위 타입들을 갖는 객체를 만들 수도 있다.
+
+#### 교차 타입과 타입 확장(extends)의 차이점은 무엇일까?
+
+##### 공통점
+
+타입 관의 관계를 표현하는 방법이다.
+
+##### 차이점
+
+1. 교차 타입의 경우, 두 개 이상의 타입이 갖는 속성과 메서드를 모두 가지는 `새로운 타입`을 생성한다. `and`연산자와 유사하다.
+2. 타입 확장은, 이미 존재하는 타입에 새로운 속성이나 메서드를 추가하는 데 사용된다. `extends` 키워드와 유사하다.
+
+- 교차 타입은 두 개 이상의 타입이 필요한 경우에, 타입 확장은 이미 존재하는 타입에 새 속성이나 메서드를 추가할 때 사용된다.
+
+### 4.4.1 교차 타입의 위험성
+
+- 교차 타입을 사용할 때는 가능한 한 코드를 간결하게 유지해야 한다.
+
+#### 긴 오류
+
+- 복잡한 교차 타입을 만들게 되면, 할당 가능성 오류 메시지가 읽기 더 어려워진다.
+
+```ts
+type Person = { name: string; age: number };
+type Employee = { company: string; salary: number };
+type Student = { school: string; grade: number };
+type Teacher = { school: string; salary: number };
+
+type EmployeeAndStudentAndTeacher = Employee &
+  Student &
+  Teacher & { name: string };
+```
+
+- 위와 같은 예시가 있을 때
+
+```ts
+// Error : Type '{ name: string; company: string; salary: number; school: string; grade: number; }' is not assignable to type 'Employee & Student & Teacher & { name: string; }'.
+// Type '{ name: string; company: string; salary: number; school: string; grade: number; }' is not assignable to type 'Employee'.
+// Types of property 'salary' are incompatible.
+// Type 'number' is not assignable to type 'never'.
+```
+
+#### never
+
+- 교차 타입을 사용할 때 두 개의 원시 타입을 함께 시도하면, `never` 키워드로 표시되는 never 타입이 된다.
+- never 키워드, never 타입은 프로그래밍 언어에서 bottom 또는 empty 타입을 뜻한다.
+- bottom 타입은 값을 가질 수 없고 참조할 수 없는 타입이다. bottom 타입에는 그 어떠한 타입도 제공할 수 없다.
