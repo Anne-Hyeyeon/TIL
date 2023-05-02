@@ -725,3 +725,34 @@ function concatenateStrings(separator: string, ...strings: string[]): string {
   return strings.join(separator);
 }
 ```
+
+## 5.2 반환 타입
+
+- 타입스크립트는 지각적(perceptive)이기 때문에, 함수가 반환할 수 있는 모든 값을 이해하면 함수가 반환하는 타입을 알 수 있다.
+- 함수에 다른 값을 가진 여러 개의 반환문을 포함하고 있다면, 타입스크립트는 반환 타입을 가능한 모든 변환 타입의 조합으로 유추한다.
+
+```ts
+// 타입 : string | number | boolean
+function foo(bar: string | number) {
+  if (typeof bar === "string") {
+    return bar.toUpperCase();
+  } else if (typeof bar === "number") {
+    return bar * 2;
+  } else {
+    return false;
+  }
+}
+```
+
+위 코드에서 타입스크립트는 foo의 반환 타입을 string, number 또는 boolean으로 유추한다.
+
+### 5.2.1 명시적 반환 타입
+
+#### 함수에서 반환 타입을 명시적으로 선언하는 방식이 좋을 때
+
+1. 반환값이 많은 함수가 항상 동일한 타입의 값을 반환하도록 강제할 때
+2. 타입스크립트는 **재귀 함수**의 반환 타입을 통해 타입을 유추하는 것을 거부함
+3. 수백 개의 타입스크립트 파일이 있는 경우
+
+- 함수의 반환문이 함수의 반환 타입으로 할당할 수 없는 값을 반환하는 경우, 타입스크립트는 할당 가능성 오류를 표시한다.
+  \
