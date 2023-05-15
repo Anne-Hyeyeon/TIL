@@ -11,3 +11,27 @@
 - For example, the "src" attribute of an image element can be accessed and changed using the "src" property of the JavaScript object representing the image element.
 ### Summary
 - In summary, an "attribute" is part of the HTML code used to define an element's properties, while a "property" is a value assigned to that attribute that can be accessed and manipulated through JavaScript.
+
+# 2023-05-15 
+## Type Assertion VS Type Declaration
+### Type Assertion
+- Type assertion in TypeScript is used to assert or convert the type of a variable to a more specific type, even when the TypeScript compiler may not be able to detect it.
+- Two ways to perform type assertions in TS
+1) Using the "as" keyword
+```ts
+let myVar: any = "hello";
+let myString: string = myVar as string;
+```
+- In this example, we first declare a variable myVar of type any and assign it a string value. We then use the as keyword to assert that myVar should be treated as a string, and assign the resulting value to a new variable myString.
+2) Using the "<>" syntax:
+```ts
+let myVar: any = "hello";
+let myString: string = <string>myVar;
+```
+### Type Declaration
+- Type declaration in TypeScript is used to explicitly specify the type of a variable, function, or other entity. 
+```ts
+function addNumbers(x: number, y: number): number {
+  return x + y;
+}
+```
