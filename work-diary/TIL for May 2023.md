@@ -35,3 +35,32 @@ function addNumbers(x: number, y: number): number {
   return x + y;
 }
 ```
+
+# 2023-05-16
+## What is useLocation hook?
+### useLocation
+- The useLocation hook allows you to access and interact with the current **location object** in a React component.
+### location object
+- The location object represents the **current URL** in your application and contains information about the **current route**, **query parameters**, and other relevant data.
+### What can I do with useLocation hook?
+- The useLocation hook provides a simple way to access this location object within a functional component.
+- By importing and using the useLocation hook in your component, you can retrieve the current location object and access its properties such as pathname, search, state, and more.
+```ts
+import { useLocation } from 'react-router-dom';
+
+const MyComponent = () => {
+  const location = useLocation();
+
+  // Accessing properties of the location object
+  console.log(location.pathname);
+  console.log(location.search);
+  console.log(location.state);
+
+  return (
+    // JSX of your component
+    // ...
+  );
+};
+```
+- You can then access properties of the location object, such as pathname, search, and state, to retrieve information about the current URL.
+- UseLocation hook is typically used within components that are rendered by a Route component or nested within a component that is rendered by a Route component in order to access the routing information.
