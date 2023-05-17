@@ -64,3 +64,24 @@ const MyComponent = () => {
 ```
 - You can then access properties of the location object, such as pathname, search, and state, to retrieve information about the current URL.
 - UseLocation hook is typically used within components that are rendered by a Route component or nested within a component that is rendered by a Route component in order to access the routing information.
+
+
+# 2023-05-17
+## import React from 'react'
+### What is 'import React from 'react'?'
+- In React.js, the `import React from 'react'` statement is used to import the **necessary dependencies** from the React library. 
+- When you use this import statement, it allows you to **access and use the core features, components, and utilities provided by React.**
+
+## What happends when I use this import statement?
+1. `Module System`: React follows the module system, which allows developers to organize their code into reusable modules. The import keyword is used to import modules from external files or libraries.
+2. `Default Export` : The React library typically exports its functionality using a default export. It means that when you import from 'react', you are importing the default export of the 'react' module, which is the main React object.
+```js
+import React from 'react';
+
+function Button({ text }) {
+  return <button>{text}</button>;
+}
+
+export default Button;
+```
+3.  `React Namespace`: By importing React, you create a reference (or namespace) to the React library. This means you can access various components and utilities provided by React using the React object.
