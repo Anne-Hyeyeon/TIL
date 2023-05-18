@@ -102,7 +102,7 @@ function MyComponent() {
 }
 ```
 - `Custom Hooks`: If you define custom hooks that use React features or rely on the React object, you will need to import React within those custom hooks.
-- ```ts
+```ts
 - import React from 'react';
 
 function useCustomHook() {
