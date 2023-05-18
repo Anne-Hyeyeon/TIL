@@ -72,8 +72,63 @@ const MyComponent = () => {
 - In React.js, the `import React from 'react'` statement is used to import the **necessary dependencies** from the React library. 
 - When you use this import statement, it allows you to **access and use the core features, components, and utilities provided by React.**
 
-## What happends when I use this import statement?
+### What happends when I use this import statement?
 1) step 1. `Module Resolution`: React follows the module system, which allows developers to organize their code into reusable modules. The import keyword is used to import modules from external files or libraries.
 2) step 2. `Default Export` : The React library typically exports its functionality using a default export. It means that when you import from 'react', you are importing the default export of the 'react' module, which is
 3) step 3. `Creating a Reference to React` : By importing React, you create a reference (or namespace) to the React library. This means you can access various components and utilities provided by React using the React object.
 4) step 4. `Accessing React Features`: After importing React, you can use the React object to access different aspects of React, such as React components, hooks, context, and more. For example, you can create React components by extending React.Component, use hooks like React.useState, or access the context API using React.createContext.
+
+### Why do I have to do 'import React from 'react''?
+- `JSX Transformation`: React uses JSX (JavaScript XML) syntax, which allows you to write HTML-like code in your JavaScript files. However, JSX is not natively supported by browsers. The import React from 'react' statement is necessary because it includes the JSX transformation logic required to convert JSX code into regular JavaScript code that browsers can understand. (But after React version 17, you no longer need to import React module to use JSX transformation.
+- `React Library Access`: The import React from 'react' statement gives you access to the full React library. React provides a set of functions, components, and utilities that are necessary for building and rendering user interfaces. Without importing React, you won't be able to use these features, such as creating React components, rendering them to the DOM, managing state, handling events, and more.
+- `Component Inheritance`: When you create a custom component in React, you typically extend the **React.Component** class or use functional components with hooks. The import React from 'react' statement provides access to the React object, which includes the base Component class and other essential components and utilities needed for creating and managing components.
+
+### After version 17... Automatic JSX Runtime
+- Starting from React version 17, you no longer need to explicitly import the React object in most cases. This change is known as `Automatic JSX Runtime` or `JSX Transform` introduced in React 17.
+- Under the Automatic JSX Runtime, React components can be used without importing React explicitly, as long as you have the necessary tools and configurations in place. This change was made to improve performance and reduce the bundle size of React applications.
+
+### Some situations where you may need to import React after version 17
+- `JSX Fragments`: If you use JSX Fragments (<React.Fragment> or the shorthand syntax <>) in your components, you will need to import React explicitly, as JSX Fragments require the React object.
+```ts
+import React from 'react';
+
+function MyComponent() {
+  return (
+    <>
+      <h1>Title</h1>
+      <p>Content</p>
+    </>
+  );
+}
+```
+- `Custom Hooks`: If you define custom hooks that use React features or rely on the React object, you will need to import React within those custom hooks.
+- ```ts
+- import React from 'react';
+
+function useCustomHook() {
+  // Using React state in the custom hook
+  const [count, setCount] = React.useState(0);
+
+  // Rest of the custom hook logic
+  // ...
+}
+
+function MyComponent() {
+  useCustomHook();
+
+  // Rest of the component logic
+  // ...
+}
+```
+-`Conditional Rendering`: If you have conditional rendering logic that depends on React elements or components, you may need to import React to use JSX syntax within the conditional statements.
+```ts
+import React from 'react';
+
+function MyComponent({ isLoggedIn }) {
+  return (
+    <div>
+      {isLoggedIn ? <p>Welcome!</p> : null}
+    </div>
+  );
+}
+```
