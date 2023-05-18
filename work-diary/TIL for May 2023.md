@@ -73,15 +73,7 @@ const MyComponent = () => {
 - When you use this import statement, it allows you to **access and use the core features, components, and utilities provided by React.**
 
 ## What happends when I use this import statement?
-1. `Module System`: React follows the module system, which allows developers to organize their code into reusable modules. The import keyword is used to import modules from external files or libraries.
-2. `Default Export` : The React library typically exports its functionality using a default export. It means that when you import from 'react', you are importing the default export of the 'react' module, which is the main React object.
-```js
-import React from 'react';
-
-function Button({ text }) {
-  return <button>{text}</button>;
-}
-
-export default Button;
-```
-3.  `React Namespace`: By importing React, you create a reference (or namespace) to the React library. This means you can access various components and utilities provided by React using the React object.
+1) step 1. `Module Resolution`: React follows the module system, which allows developers to organize their code into reusable modules. The import keyword is used to import modules from external files or libraries.
+2) step 2. `Default Export` : The React library typically exports its functionality using a default export. It means that when you import from 'react', you are importing the default export of the 'react' module, which is
+3) step 3. `Creating a Reference to React` : By importing React, you create a reference (or namespace) to the React library. This means you can access various components and utilities provided by React using the React object.
+4) step 4. `Accessing React Features`: After importing React, you can use the React object to access different aspects of React, such as React components, hooks, context, and more. For example, you can create React components by extending React.Component, use hooks like React.useState, or access the context API using React.createContext.
