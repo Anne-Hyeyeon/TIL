@@ -186,7 +186,7 @@ async function fetchData() {
 fetchData();
 ```
 - In the above example, the fetchData function is defined as an async function. It uses the await keyword to pause the execution for 2000 milliseconds (simulating an asynchronous operation) and then logs the message "Data fetched!".
-### What does `resolve` and `resolution` mean in the context of JavaScript?
+## What does `resolve` and `resolution` mean in the context of JavaScript?
 - In the context of JavaScript promises, the terms "resolve" and "resolution" refer to the outcome of a promise.
 ### resolve
 - In the context of a promise, `resolve` refers to the **successful completion or fulfillment of a promise.
