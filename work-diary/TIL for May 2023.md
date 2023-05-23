@@ -159,3 +159,60 @@ try {
 4) Inside the catch block, you can write code to handle the exception, such as logging an error message, displaying a user-friendly error, or taking appropriate actions to recover from the exception.
 
 - By using try/catch, you can prevent your program from crashing and provide a graceful way to handle exceptions.
+
+# 2023-05-23
+## async/await
+### What is async/await?
+- A powerful feature in JS that simplifies working with asynchronous code. It allows you to wirte **asynchronous code** in a **more synchronous style**, making it easier to read and understand.
+### How it works?
+- The `async` is used to define an synchronous function. An asynchronous function always returns a promise object.
+- Within an asynchronous function, you can use the `await` before a promise to pause the execution of the function until the promise is resolved or rejected.This allows you to wirte code that **looks synchronous but behaves asynchronously.**
+- You can only use `await` inside an `async` function. However, you can use multiple await statements sequentially or even in parallel to wait for multiple promises.
+```ts
+ function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchData() {
+  try {
+    console.log('Fetching data...');
+    await delay(2000); // Simulating an asynchronous operation
+    console.log('Data fetched!');
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+fetchData();
+```
+- In the above example, the fetchData function is defined as an async function. It uses the await keyword to pause the execution for 2000 milliseconds (simulating an asynchronous operation) and then logs the message "Data fetched!".
+### What does `resolve` and `resolution` mean in the context of JavaScript?
+- In the context of JavaScript promises, the terms "resolve" and "resolution" refer to the outcome of a promise.
+### resolve
+- In the context of a promise, `resolve` refers to the **successful completion or fulfillment of a promise.
+- When a promise is resolved, it means that the asynchronous operation associated with the promise has completed successfully, and the promise is considered fulfilled.
+- Resolving a promise means that the associated `then` callback(s) will be executed, allowing you to handle the resolved value.
+```js
+const promise = new Promise((resolve, reject) => {
+  // Asynchronous operation
+  // When successful, call resolve with a value
+  resolve('Success!');
+});
+```
+
+### Resolution
+- "Resolution" refers to the state of a promise, indicating whether it has been fulfilled or rejected.
+- A promise can be in one of the following three states: 
+1) **Pending**: The initial state when the promise is neither fulfilled nor rejected.
+2) **Fulfilled**: The promise has been successfully resolved.
+3) **Rejected**: The promise encountered an error or was explicitly rejected.
+- When working with promises, you can handle the resolution using the `then` method to handle fulfillment or the catch method to handle rejection:
+```ts
+promise.then(resolvedValue => {
+  // Handle fulfillment
+}).catch(error => {
+  // Handle rejection
+});
+```
+- The resolvedValue represents the value with which the promise was resolved, and the error represents the reason for rejection.
+- Promises provide a structured way to handle asynchronous operations in JavaScript, allowing you to handle the resolution (success or failure) of an operation and write cleaner, more maintainable asynchronous code.
