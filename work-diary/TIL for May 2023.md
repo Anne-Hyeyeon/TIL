@@ -216,3 +216,90 @@ promise.then(resolvedValue => {
 ```
 - The resolvedValue represents the value with which the promise was resolved, and the error represents the reason for rejection.
 - Promises provide a structured way to handle asynchronous operations in JavaScript, allowing you to handle the resolution (success or failure) of an operation and write cleaner, more maintainable asynchronous code.
+
+# 2023-05-24
+## Excess Property Checks
+### What is Excess Property Checks?
+- In TypeScript, excess property checks refer to a type-checking mechanism that ensures the objects assigned to a variable or passed as function arguments **don't have extra properties not defined by the assigned type.
+- When you assign an object literal to a variable or pass it as an argument to a function, TypeScript checks if the object literal has any extra properties that are not explicitly defined in the type annotation or interface. If it does, TypeScript raises an error.
+
+### Example
+
+```js
+interface Person {
+  name: string;
+  age: number;
+}
+
+function greet(person: Person) {
+  console.log(`Hello, ${person.name}!`);
+}
+
+const john: Person = {
+  name: "John",
+  age: 30,
+  occupation: "Engineer" // Extra property not defined in Person interface
+};
+
+greet(john); // Object literal may only specify known properties, and 'occupation' does not exist in type 'Person'.
+
+```
+- In this example, the Person interface defines the name and age properties. However, when assigning the john object to the Person type, it includes an extra property occupation that is not part of the Person interface. TypeScript detects this and raises an error: Object literal may only specify known properties, and 'occupation' does not exist in type 'Person'.
+-  If you want to assign objects with additional properties, you can use type assertions (as) or explicitly define the object's type as a wider type that allows extra properties, such as any or an index signature.
+
+
+## How to Avoid Excess Property Checks?
+### 1) Assigning an object with extra properties to another variable
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+function greet(person: Person) {
+  console.log(`Hello, ${person.name}!`);
+}
+
+const john: Person = {
+  name: "John",
+  age: 30,
+  occupation: "Engineer" 
+};
+
+let tmp = { name: 'Joan', age:30, occupation:'Engineer' }
+tmp = john
+
+greet(tmp) // no error
+```
+- In TypeScript, when you assign an object with extra properties to **another variable**, TypeScript performs excess property checks at the point of **object literal assignment.
+-  Once the object literal **passes the type-check at the assignment site**, TypeScript widens the inferred type of the object to include any extra properties it may have. 
+-  This widened type is then used for further type-checking.
+-  In example, the error doesn't occur when assigning the john object to the tmp variable because the **excess property check is performed at the line tmp = john**
+-   At that point, TypeScript checks that the **john object conforms to the type of tmp**.
+-  Since the john object has extra properties not defined in the Person interface, it would raise an error at this assignment statement.
+-   However, once the assignment is successful, TypeScript widens the inferred type of tmp to include any extra properties of john. This means that TypeScript treats tmp as having the type { name: string, age: number, occupation: string }, even though the Person interface only defines name and age.
+- As a result, when you pass tmp to the greet function, TypeScript performs type-checking based on the widened type, which does include the occupation property. Since the greet function parameter is of type Person, and { name: string, age: number, occupation: string } satisfies the structure of Person, no error is raised.
+
+### 2) Using a Type Assertion (casting)
+-By using a `type assertion` (also known as type casting) with the as keyword, you can explicitly tell TypeScript the type of an object and bypass the excess property check.
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+function greet(person: Person) {
+  console.log(`Hello, ${person.name}!`);
+}
+
+const john = {
+  name: "John",
+  age: 30,
+  occupation: "Engineer" 
+};
+
+greet(john as Person); // Using type assertion
+```
+- In the code above, the john object has an extra property occupation that is not defined in the Person interface. However, by using the as Person type assertion, you inform TypeScript that you want to treat the john object as a Person type during the function call to greet. TypeScript will trust your assertion and won't raise an error regarding the excess property.
+- It's important to note that when using type assertions, you should be cautious and make sure that the object you're asserting to a specific type does indeed adhere to the structure and behavior of that type. Using type assertions incorrectly may lead to runtime errors or type-related issues if the object doesn't match the asserted type.
+
