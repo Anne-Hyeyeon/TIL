@@ -303,3 +303,17 @@ greet(john as Person); // Using type assertion
 - In the code above, the john object has an extra property occupation that is not defined in the Person interface. However, by using the as Person type assertion, you inform TypeScript that you want to treat the john object as a Person type during the function call to greet. TypeScript will trust your assertion and won't raise an error regarding the excess property.
 - It's important to note that when using type assertions, you should be cautious and make sure that the object you're asserting to a specific type does indeed adhere to the structure and behavior of that type. Using type assertions incorrectly may lead to runtime errors or type-related issues if the object doesn't match the asserted type.
 
+
+# 2023-05-26
+## Line-break in JSX syntax
+
+- In JSX syntax, line breaks within the content of elements are treated as spaces. This means that if you add line breaks directly inside JSX, they will be rendered as a single space when the JSX is rendered in the browser.
+
+```ts
+<div>
+  Hello
+  World
+</div>
+```
+
+- The rendered output will be a <div> element with the text "Hello World", without any visible line breaks.
