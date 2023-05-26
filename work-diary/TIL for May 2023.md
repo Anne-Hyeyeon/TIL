@@ -316,4 +316,26 @@ greet(john as Person); // Using type assertion
 </div>
 ```
 
-- The rendered output will be a <div> element with the text "Hello World", without any visible line breaks.
+- The rendered output will be a div element with the text "Hello World", without any visible line breaks.
+
+### How can I acheive line breaks or multiple lines of text within a JSX element?
+1. `Use the newline character \n`: You can include the newline character \n within the string content of an element to represent a line break. However, this approach will not preserve leading or trailing spaces within the lines, and the text will still be rendered as a single line without visible line breaks.
+```tsx
+<div>
+  Hello\nWorld
+</div>
+```
+2. `Use CSS styles` : You can apply CSS styles to the element to control its appearance and create line breaks. For example, you can use the `white-space: pre-line`; CSS property to preserve line breaks and render the text with proper line spacing.
+```tsx
+<div style={{ whiteSpace: 'pre-line' }}>
+  Hello
+  World
+</div>
+```
+3. `Use an array or separate elements` : Instead of a single string, you can use an array or separate JSX elements to represent each line of text. This way, each element can be placed on a separate line, and the rendered output will have visible line breaks.
+```tsx
+<div>
+  {['Hello', <br />, 'World']}
+</div>
+```
+
