@@ -339,3 +339,26 @@ greet(john as Person); // Using type assertion
 </div>
 ```
 
+# 2023-05-30
+## What is `.d.ts` file?
+- It allows you to describe the shape and types of the variables, functions, classes, modules, and other constructs in JavaScript so that TypeScript can perform static type checking.
+
+### Purpose
+- TypeScript uses type annotations to provide static type checking during development. However, when working with existing JavaScript code or external libraries that don't have type information, **you can create declaration files to define the types explicitly.
+### Definition
+- A `.d.ts` file is written in TypeScript syntax but does not contain any executable code. Instead, it provides **type declarations** and **interfaces** to describe the structure of the JavaScript code it corresponds to.
+### Ambient Declarations
+- In declaration files, you use ambient declarations to declare types for variables, functions, classes, and other constructs that exist outside the TypeScript codebase. Ambient declarations start with the **declare** keyword.
+### Type Definitions
+-  `.d.ts` files can contain various type definitions such as interfaces, types, enums, and type aliases. These definitions **help TypeScript understand the structure and expected types of the entities** defined in the JavaScript code.
+### Module Declarations
+-  If you're working with JavaScript modules, you can use `.d.ts` files to **declare the module structure and export/import statements.** This helps TypeScript recognize the module's shape and allows for proper type checking.
+### Triple-Slash Directives
+-  To associate a `.d.ts` file with a corresponding JavaScript file, you can use a `triple-slash directive` at the top of the JavaScript file. For example, 
+```
+/// <reference path="path/to/file.d.ts" /> 
+```
+informs the TypeScript compiler to include the type definitions from the specified .d.ts file.\
+### Definitely Typed
+-  When using external libraries without TypeScript support, you can often find community-maintained `.d.ts` files in the Definitely Typed repository (https://definitelytyped.org/). These declaration files provide TypeScript definitions for popular libraries, allowing you to leverage TypeScript's benefits when working with them.
+- Overall, .d.ts files in TypeScript serve as a **bridge between JavaScript and TypeScript,** enabling you to add type annotations to existing JavaScript code and libraries and enjoy the advantages of static type checking in your projects.
