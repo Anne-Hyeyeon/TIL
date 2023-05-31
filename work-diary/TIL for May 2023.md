@@ -362,3 +362,25 @@ informs the TypeScript compiler to include the type definitions from the specifi
 ### Definitely Typed
 -  When using external libraries without TypeScript support, you can often find community-maintained `.d.ts` files in the Definitely Typed repository (https://definitelytyped.org/). These declaration files provide TypeScript definitions for popular libraries, allowing you to leverage TypeScript's benefits when working with them.
 - Overall, .d.ts files in TypeScript serve as a **bridge between JavaScript and TypeScript,** enabling you to add type annotations to existing JavaScript code and libraries and enjoy the advantages of static type checking in your projects.
+
+
+# 2023-05-31
+
+## Client-Side Rendering (CSR)
+- Client-Side Rendering involves rendering the web page or application on the client-side, typically in the user's web browser. 
+
+### how it works
+1. `Initial request`: The client (web browser) **sends a request to the server** for the web page or application.
+2. `Server response`: The server sends back a **minimal HTML file** (often called a "skeleton" or "shell") that includes a reference to the JavaScript code required for rendering.
+3. `JavaScript execution` : The browser downloads the JavaScript code and executes it to render the page dynamically. This includes **fetching data from APIs and rendering the content** in the browser.
+4. `Interactivity` : Once the JavaScript code has executed, the user can interact with the page, and subsequent rendering changes are handled by JavaScript on the client-side without making additional server requests.
+
+### Pros of CSR
+- `Fast subsequent navigation` : After the **initial load**, navigating between pages or sections is usually faster as only data is fetched, and the **client-side updates the content.**
+- `Enhanced user experience` : Allows for more **interactive and dynamic interfaces**, as the rendering is done on the client-side.
+- `Light server load` : The server primarily handles **data/API requests**, reducing the processing load.
+
+### Cons of CSR
+- `Slower initial load` : The initial load time may be slower because the client must download the JavaScript code and then render the page.
+- `SEO challenges` : Search engine crawlers may have difficulty indexing content since the initial HTML response is often minimal.
+
