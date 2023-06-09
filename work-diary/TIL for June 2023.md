@@ -38,3 +38,6 @@
 
 - It's important to note that with the introduction of React Hooks, the lifecycle methods can also be implemented in functional components using the useEffect and other hook functions.
 - Not all lifecycle methods need to be implemented in every component. You can choose the appropriate methods based on the specific needs of your component.
+
+
+Rendered more hooks than during the previous render.
