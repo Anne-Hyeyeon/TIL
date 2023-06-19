@@ -40,5 +40,16 @@
 - Not all lifecycle methods need to be implemented in every component. You can choose the appropriate methods based on the specific needs of your component.
 
 
-Rendered more hooks than during the previous render.
-act has detected a change in the order of Hooks called by SettingLicenseContent. T
+
+# 2023-06-16 (Came back from my honeymoon!!!)
+## Rendered more hooks than during the previous render. Why does this error occur? 
+- The error message "Rendered more hooks than during the previous render" typically occurs in React when you have a mismatch in the **number or order of hooks used** within a component.
+-  Hooks in React, such as useState or useEffect, must always be called in the same order and quantity on every render of a component.
+
+### This error commonly happens when:
+1. `Hooks are conditionally called`: If you have hooks inside conditional statements (like if statements or loops), ensure that they are called unconditionally on every render path. Hooks should be called in the same order on every render, and conditional statements can cause inconsistencies.
+2. `Hooks are called inside nested functions or loops`: Hooks should only be called directly inside functional components or custom hooks, not within nested functions or loops. Make sure the hooks are called directly within the component's body.
+3. `Hooks are used in wrong components`: Each component should have its own separate set of hooks. If you accidentally use hooks inside **child components or helper functions**, it can result in the "Rendered more hooks" error.
+
+### To resolve this error:
+- Ensure that you consistently call hooks **in the same order and quantity on every render of your component.** Check for any **conditional statements or nested functions** that might be causing the issue. Also, ensure that hooks are **used only in functional components or custom hooks**, not in nested functions or loops.
