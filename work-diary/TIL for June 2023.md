@@ -41,7 +41,7 @@
 
 
 
-# 2023-06-16 (Came back from my honeymoon!!!)
+# 2023-06-19 (Came back from my honeymoon!!!)
 ## Rendered more hooks than during the previous render. Why does this error occur? 
 - The error message "Rendered more hooks than during the previous render" typically occurs in React when you have a mismatch in the **number or order of hooks used** within a component.
 -  Hooks in React, such as useState or useEffect, must always be called in the same order and quantity on every render of a component.
@@ -53,3 +53,19 @@
 
 ### To resolve this error:
 - Ensure that you consistently call hooks **in the same order and quantity on every render of your component.** Check for any **conditional statements or nested functions** that might be causing the issue. Also, ensure that hooks are **used only in functional components or custom hooks**, not in nested functions or loops.
+
+# 2023-06-20
+## 10 Topics for Intermediate Front-End Developer
+
+1. `Responsive Web Design`: Explore how to develop web designs that adapt to various devices and screen sizes using media queries.
+2. `CSS Preprocessors (Sass, Less)`: Introduce the usage of CSS preprocessors to enhance code reusability and maintainability.
+3. `CSS Grid System`: Share techniques and tips for utilizing CSS grid to construct web page layouts effectively.
+4. `Modern JavaScript`: Demonstrate writing more efficient and concise code using JavaScript features from ES6 and beyond.
+5. `Web Accessibility`: Discuss techniques for adhering to web accessibility guidelines, ensuring easy access for all users. ⭐⭐
+6. `Performance Optimization`: Address methods to improve website loading speed and overall performance, such as image optimization, code bundling, and caching. ⭐⭐⭐
+7. `Mobile Web Development`: Present technologies related to developing mobile-optimized web apps or sites.
+8. `Frontend Frameworks`: Introduce frontend frameworks like React, Vue.js, Angular, and provide simple examples or use cases.
+9. `Responsive Images`: Cover methods for providing optimized images that adjust to different screen sizes, including srcset and sizes attributes, image resizing, and more.
+10. `Web Security`: Introduce fundamental web security concepts that frontend developers should be aware of, along with mitigation techniques and best practices. ⭐⭐⭐
+
+- I am weak in all areas, but the ⭐ indicates  that I need to put extra effort into.
