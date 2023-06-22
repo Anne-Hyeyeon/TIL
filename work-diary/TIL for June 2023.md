@@ -69,3 +69,22 @@
 10. `Web Security`: Introduce fundamental web security concepts that frontend developers should be aware of, along with mitigation techniques and best practices. ⭐⭐⭐
 
 - I am weak in all areas, but the ⭐ indicates  that I need to put extra effort into.
+
+# 2023-06-22
+## calc()
+### calc()?
+-  calc() function in CSS allows you to perform **mathematical calculations within property values.** It provides a convenient way to **dynamically calculate** and set values based on arithmetic expressions.
+### How can I use calc()?
+- The calc() function accepts various mathematical operators such as addition (+), subtraction (-), multiplication (*), and division (/).
+- It can operate on different types of CSS units, including **lengths (pixels, percentages, ems, rems)**, **angles (degrees, radians)**, and even some **color-related values.**
+- You can use calc() to combine fixed values with dynamic values, perform calculations based on different properties, or create responsive layouts.
+
+```css
+.container {
+  width: calc(50% - 20px); /* Calculates the width to be 50% minus 20 pixels */
+  height: calc(100vh - 2rem); /* Calculates the height to be the full viewport height minus 2 rems */
+  font-size: calc(12px + 2vw); /* Calculates the font size based on a base size of 12 pixels plus 2% of the viewport width */
+}
+```
+- Be sure to check the browser compatibility for the properties and values you're using calc() with.
+- 
