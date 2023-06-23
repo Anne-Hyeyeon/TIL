@@ -70,6 +70,8 @@
 
 - I am weak in all areas, but the ⭐ indicates  that I need to put extra effort into.
 
+
+- Recently, I have been working on adding horizontal scrollbars to my components. Here is some CSS knowledge related to the task I have been working on.
 # 2023-06-22
 ## calc()
 ### calc()?
@@ -88,3 +90,18 @@
 ```
 - Be sure to check the browser compatibility for the properties and values you're using calc() with.
 
+# 2023-06-23
+## overflow: auto
+- The "overflow: auto" property is used to control how content that exceeds the dimensions of an element should be displayed.
+- When applied to an element, it enables scrollbars to appear when necessary, allowing users to scroll and view the overflowing content.
+
+### The conditions that determine when scrollbars will appear:
+1. `Content Size`: Scrollbars will only appear if the content inside the element **exceeds its specified dimensions.** This includes both the **width** and **height** of the element. If the content fits within the element without overflowing, no scrollbars will be displayed.
+
+2. `Element Size`: The element itself must have a **defined size** in order for scrollbars to appear. This can be achieved by **setting explicit width and height values** or by using CSS properties such as **"min-width"**, **"max-width"**, **"min-height"**, or **"max-height"**.
+
+3. `Overflow`: The content must be set to **overflow the boundaries of the element.** The "overflow" property can have four possible values: "visible" (default), "hidden", "scroll", or "auto". To enable scrollbars, the value should be set to "auto" or "scroll". "auto" allows the scrollbars to appear only when needed, while "scroll" forces the scrollbars to always be visible.
+
+4. `Parent Container`: If the element with "overflow: auto" is nested inside another container, such as a div, **the parent container should have a defined size as well**. If the parent container is too small to accommodate the child element with overflow, scrollbars will appear on the parent container, allowing scrolling within the child element.
+
+- In summary, when using "overflow: auto", scrollbars will appear if the content inside the element overflows its dimensions, the element itself has a defined size, the "overflow" property is set to "auto" or "scroll", and the parent container, if present, has a sufficient size to contain the child element with overflow.
