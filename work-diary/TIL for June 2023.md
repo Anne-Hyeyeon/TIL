@@ -105,3 +105,26 @@
 4. `Parent Container`: If the element with "overflow: auto" is nested inside another container, such as a div, **the parent container should have a defined size as well**. If the parent container is too small to accommodate the child element with overflow, scrollbars will appear on the parent container, allowing scrolling within the child element.
 
 - In summary, when using "overflow: auto", scrollbars will appear if the content inside the element overflows its dimensions, the element itself has a defined size, the "overflow" property is set to "auto" or "scroll", and the parent container, if present, has a sufficient size to contain the child element with overflow.
+
+
+# 2023-06-26
+## height: 100%
+### 😭
+- I recently realized that my understanding of height: 100% was incorrect. As a frontend developer, it's crucial to have a solid grasp of fundamental concepts. Unfortunately, I misunderstood how height: 100% works in relation to child elements. I mistakenly believed that the height of a child element would be determined by setting height: 100% on its parent.
+
+- In reality, height: 100% is a way to make an element's height match its parent element's height. It doesn't depend on the content or size of the child elements. Similarly, width: 100% sets the width of an element to be equal to its parent element's width.
+
+- I now realize that it's essential to have a clear understanding of these concepts to write effective frontend code. I apologize for any confusion my previous understanding may have caused, and I'm committed to continuously improving my skills as a frontend developer.
+
+### height: 100%
+- `width: 100%` means that the width of the element is set to be the **same as its parent element's width**. In other words, it takes up 100% of the parent element's width relative to it.
+- `height: 100%` means that the height of the element is set to be the **same as its parent element's height**. In other words, it takes up 100% of the parent element's height relative to it.
+
+- By using these two properties, you can adjust the size of an element to match its parent element. For example, if the parent element has a width of 500px, setting width: 100% on the child element will also make it have a width of 500px. Similarly, if the parent element has a height of 300px, setting height: 100% on the child element will also make it have a height of 300px.
+
+### 100vh
+- `100vh` represents **100% relative to the viewport height**. The viewport refers to the visible area of the browser window that the user is currently viewing. Therefore, when you use height: 100vh, the element's height will be set to be the same as the **current height of the browser window.** This is useful for making an element expand to occupy the full height of the browser window, including the scrollable area.
+
+### In summary:
+- `width: 100% and height: 100%` adjust the size of the child element relative to its parent element.
+- `100vh` adjusts the size of the element relative to the current height of the browser window.
