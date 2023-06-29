@@ -168,3 +168,22 @@ body::-webkit-scrollbar {
 - In the above CSS code, the scrollbar-width property is used for Firefox, and the -ms-overflow-style property is used for IE 10+. The -webkit-scrollbar selector is used for WebKit-based browsers like Chrome and Safari to hide the scrollbar.
 
 - By using this code, the vertical scrollbar will not be displayed, and users will not be able to scroll the page using the scrollbar.
+
+
+# 2023-06-29
+## What is the difference between UI and UX?
+- While preparing for the Information Processing Engineer examination, I realized that I lacked a proper understanding of the basic differences between these two concepts.
+
+### `User Interface (UI)`
+- UI refers to the **visual elements and interactive components** of a product that **users directly interact with.**
+- It focuses on the presentation and aesthetics of the design. UI design involves creating **visually appealing and user-friendly interfaces**, including **elements** such as buttons, icons, menus, color schemes, and typography. The main goal of UI design is **to make the interface visually appealing, intuitive, and easy to navigate.**
+
+### `User Experience (UX)`
+- UX encompasses the **overall experience and satisfaction** a user has while interacting with a product or service.
+- It considers the **entire user journey**, from the initial interaction to the final outcome.
+- UX design involves understanding **user behaviors, needs, and goals** to create **meaningful and enjoyable experiences**.
+- It includes various aspects such as information architecture, usability, accessibility, user research, wireframing, prototyping, and testing.
+- The main goal of UX design is **to ensure that the product or service meets user expectations, is usable, and provides a positive and seamless experience.**
+
+### Summary
+- In summary, `UI` focuses on the **visual and interactive elements of the design**, while `UX` focuses on the **overall user experience and satisfaction**. UI design is about how a product **looks and feels**, while UX design is about **how it works and how users interact with it**. Both UI and UX are crucial for creating successful and user-centric designs.
