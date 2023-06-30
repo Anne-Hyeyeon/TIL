@@ -187,3 +187,15 @@ body::-webkit-scrollbar {
 
 ### Summary
 - In summary, `UI` focuses on the **visual and interactive elements of the design**, while `UX` focuses on the **overall user experience and satisfaction**. UI design is about how a product **looks and feels**, while UX design is about **how it works and how users interact with it**. Both UI and UX are crucial for creating successful and user-centric designs.
+
+# 2023-06-30
+## The five basic principles of object-oriented methodology
+1. `Encapsulation`(캡슐화) : Encapsulation refers to the **bundling of related data and functions** into objects. Objects interact with the outside world through **defined interfaces**, rather than allowing direct access to internal data. This helps maintain **data security and consistency**, while **hiding the internal implementation of objects** and reducing coupling between objects.
+
+2. `Inheritance` (상속) : Inheritance allows a class to **inherit the characteristics and behaviors of another class**. A child class can **reuse** and **extend the attributes and operations defined in a parent class**. This promotes code **reusability and maintainability**.
+
+3. `Polymorphism` (다형성) : Polymorphism is the concept that **objects of different types can be treated as objects of a common superclass**. Objects can exhibit different behaviors while sharing the same method names. This enables writing **flexible code** and enhances **extensibility and maintainability**.
+
+4. `Abstraction` (추상화) : Abstraction simplifies the **complex real-world entities into essential characteristics**. In object-oriented programming, abstraction is achieved through **classes and interfaces**. Abstraction **emphasizes important concepts and functionalities** while **hiding implementation details**, thereby improving code **readability and comprehension**.
+
+5. `Multiplicity` (다중성) : Multiplicity represents **relationships between objects**. It defines **how many instances of one class are associated with instances of another class**. Multiplicity can express relationships such as **one-to-one (1:1), one-to-many (1:N), and many-to-many (N:M)** relationships. Associations, aggregations, and inheritances are used to represent multiplicity. Multiplicity helps define the relationships between objects.
