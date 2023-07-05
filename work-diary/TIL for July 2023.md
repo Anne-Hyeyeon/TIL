@@ -13,3 +13,25 @@ Example:
 Let's consider testing a login functionality of a website. In Black Box Testing, you would only have access to the user interface and specifications. You would design test cases based on the expected behavior of the login feature, such as verifying if valid usernames and passwords are accepted, checking for error messages with invalid inputs, testing password reset functionality, and ensuring proper redirection after successful login. You would not have knowledge of the code implementation or the internal workings of the authentication process.
 
 Both White Box Testing and Black Box Testing have their advantages and are used in different scenarios. White Box Testing is useful for thorough code coverage and identifying internal defects, while Black Box Testing focuses on validating the system's functionality from an end-user perspective. Often, a combination of both techniques is employed to achieve comprehensive test coverage.
+
+# 2023-07-04
+## Sorting Algorithms
+### `Bubble Sort`
+- It compares **adjacent elements** in the array and **swaps their positions** if necessary. Bubble Sort is the simplest but least efficient algorithm, especially for large arrays.
+- time complexity(average) : O(n^2)
+### `Selection Sort`
+- It finds the **smallest element** in the given array and swaps it with the first position. Then, it finds the second smallest element and **swaps** it with the second position. Selection Sort is not efficient for large arrays because it repeatedly searches for the minimum value.
+- time complexity(average) : O(n^2)
+### `Insertion Sort`
+- It divides the array into a **sorted and an unsorted part**. It takes the first element from the unsorted part and inserts it into the sorted part in the appropriate position. Insertion Sort is efficient for small-sized arrays.
+- time complexity(average) : O(n^2)
+### `Quick Sort`
+-  It uses the **divide and conquer approach** to sort the array. Quick Sort selects **a pivot from the array**, places the **smaller elements to the left of the pivot**, and the **larger elements to the right**. It recursively performs Quick Sort on each subarray. Quick Sort is efficient in most cases.
+- time complexity(average) : O(nlogn)
+### `Merge Sort `
+- It uses the **divide and conquer approach** to sort the array. Merge Sort **divides the array into halves**, recursively sorts each half, and then **merges the sorted halves to obtain the fully sorted array**. It is a stable sorting algorithm and efficient for large datasets.
+- - time complexity(average) : O(nlogn)
+### `Heap Sort`
+- It sorts the array **based on a complete binary heap data structure**. Heap Sort constructs **a max heap or min heap** from the given array, then extracts the **root node and stores it from the back of the array**. The extracted node is removed, and the heap is restructured. Heap Sort has a time complexity of **O(nlogn)** even in the worst case.
+- time complexity(average) : O(nlogn)
+
