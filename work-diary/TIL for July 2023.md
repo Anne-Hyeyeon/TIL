@@ -57,3 +57,29 @@ Both White Box Testing and Black Box Testing have their advantages and are used 
 - This **reduces the coupling between the subject and observers**, enabling loose coupling and interaction.
 - The Observer pattern is commonly used in event handling, MVC architecture, publisher/subscriber model, etc.
 
+# 2023-07-07
+## Using ternary operator vs &&
+- While refactoring my code, I was debating whether to replace && with the ternary operator .
+```tsx
+// original code
+...
+return (
+  {data && (...)}
+  {!data && (...)}
+)
+```
+The reason I wrote the code in this way is that I find it takes more time to understand the intention of the code when using the ternary operator. I believe that using `&&` allows me to convey my intention more intuitively by clearly indicating the conditions of "there is data" and "there is no data."
+```tsx
+// refactored code
+...
+return (
+  {data ? (...) : (...)
+```
+However, in the end, I have decided to change && to the ternary operator.
+
+### why I changed `&&` to termary operator
+
+- sing the && operator instead of the ternary operator for the conditional rendering of the data section generally should not cause any issues. The && operator is also known as **"short-circuit evaluation,"** where it stops evaluation and returns false if the condition is false. Therefore, if data is absent, it will be considered falsy and that part will not be rendered.
+- However, it is important to note that this approach is applicable only when data is `null` or `undefined`. If data can be other falsy values like `false`, `0`, or an empty string, but they should still be considered valid data, using the && operator may lead to incorrect rendering. In such cases, it is safer to use the ternary operator to explicitly handle the condition.
+- Therefore, if I only want to render that section when data is null or undefined, using the && operator should be fine. Otherwise, when dealing with other falsy values, it is recommended to use the ternary operator for explicit handling.
+  
