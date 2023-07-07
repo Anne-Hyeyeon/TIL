@@ -58,7 +58,7 @@ Both White Box Testing and Black Box Testing have their advantages and are used 
 - The Observer pattern is commonly used in event handling, MVC architecture, publisher/subscriber model, etc.
 
 # 2023-07-07
-## Using ternary operator vs &&
+## Using `ternary operator` vs `&&`
 - While refactoring my code, I was debating whether to replace && with the ternary operator .
 ```tsx
 // original code
