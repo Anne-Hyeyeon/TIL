@@ -74,6 +74,7 @@ The reason I wrote the code in this way is that I find it takes more time to und
 ...
 return (
   {data ? (...) : (...)
+)
 ```
 However, in the end, I have decided to change && to the ternary operator.
 
