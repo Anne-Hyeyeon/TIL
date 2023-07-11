@@ -89,7 +89,7 @@ However, in the end, I have decided to change && to the ternary operator.
 ## Middlewares
 - middleware refers to software or infrastructure that **sits between** different applications, systems, or components, enabling communication, integration, and coordination. It abstracts the underlying complexities and provides a unified interface or services that facilitate interoperability, scalability, and reliability in distributed environments.
   
-### `RPC (Remote Procedure Call)
+### `RPC (Remote Procedure Call)`
 RPC is a communication protocol that allows a program to **call functions or procedures on a remote system as if they were local**. It enables the client and server applications to communicate **across different machines** or networks transparently. The client program invokes a procedure on the server, and the RPC mechanism handles the underlying network communication and marshaling of data.
 
 ### `MOM (Message-Oriented Middleware)`
