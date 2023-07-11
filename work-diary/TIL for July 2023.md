@@ -83,4 +83,26 @@ However, in the end, I have decided to change && to the ternary operator.
 - sing the && operator instead of the ternary operator for the conditional rendering of the data section generally should not cause any issues. The && operator is also known as **"short-circuit evaluation,"** where it stops evaluation and returns false if the condition is false. Therefore, if data is absent, it will be considered falsy and that part will not be rendered.
 - However, it is important to note that this approach is applicable only when data is `null` or `undefined`. If data can be other falsy values like `false`, `0`, or an empty string, but they should still be considered valid data, using the && operator may lead to incorrect rendering. In such cases, it is safer to use the ternary operator to explicitly handle the condition.
 - Therefore, if I only want to render that section when data is null or undefined, using the && operator should be fine. Otherwise, when dealing with other falsy values, it is recommended to use the ternary operator for explicit handling.
+
+
+# 2023-07-11
+## Middlewares
+- middleware refers to software or infrastructure that **sits between** different applications, systems, or components, enabling communication, integration, and coordination. It abstracts the underlying complexities and provides a unified interface or services that facilitate interoperability, scalability, and reliability in distributed environments.
   
+### `RPC (Remote Procedure Call)
+RPC is a communication protocol that allows a program to **call functions or procedures on a remote system as if they were local**. It enables the client and server applications to communicate **across different machines** or networks transparently. The client program invokes a procedure on the server, and the RPC mechanism handles the underlying network communication and marshaling of data.
+
+### `MOM (Message-Oriented Middleware)`
+MOM is a middleware infrastructure that supports the **exchange of messages between distributed applications.** It provides a communication model based on **asynchronous message passing**, where applications can send and receive messages independently of each other. MOM ensures reliable delivery, message queuing, and often supports features like publish/subscribe and message filtering.
+
+### `ORB (Object Request Broker)`
+ORB is a middleware component that **facilitates communication between distributed objects in a distributed system**. It enables objects written in **different programming languages to interact transparently** by providing services such as object location, method invocation, and parameter marshaling. ORB acts as an intermediary between clients and servers, handling the complexities of distributed object communication.
+
+### `DB middleware (Database Middleware)`
+DB middleware refers to software components or services that **sit between applications and databases**, providing an **abstraction layer and facilitating database connectivity**. It simplifies database access for applications by handling tasks like connection management, query execution, transaction management, and data caching. DB middleware often includes features like object-relational mapping (ORM) and database connection pooling.
+
+### `TP monitor (Transaction Processing Monitor)`
+TP monitor is a middleware system designed to **manage and coordinate transactional processing** in distributed environments. It provides services for transaction management, concurrency control, resource allocation, and recovery. TP monitors ensure the integrity and consistency of distributed transactions across multiple systems or databases.
+
+### `WAS (Web Application Server)`
+WAS is a middleware platform specifically designed to **host and manage web applications**. It provides a runtime environment that supports the **execution of web-based applications**, including handling **HTTP requests** managing application components, and providing services like security, session management, and scalability. WAS typically includes **a web server, servlet engine, and support for various web technologies**.
