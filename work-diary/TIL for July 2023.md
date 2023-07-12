@@ -106,3 +106,25 @@ TP monitor is a middleware system designed to **manage and coordinate transactio
 
 ### `WAS (Web Application Server)`
 WAS is a middleware platform specifically designed to **host and manage web applications**. It provides a runtime environment that supports the **execution of web-based applications**, including handling **HTTP requests** managing application components, and providing services like security, session management, and scalability. WAS typically includes **a web server, servlet engine, and support for various web technologies**.
+
+
+
+# 2023-07-12
+## Denormalization
+- Denormalization is a technique in database design where certain principles of **normalization are deliberately violated** in order to **improve performance**.
+  While normalization aims to **eliminate data redundancy** and **ensure data consistency and integrity**, there are situations where optimizing **read and write operations** becomes more important.
+
+1. `Adding duplicate tables`: One form of denormalization is **adding tables** that contain **duplicated data**. This **sacrifices data consistency** but improves the **performance of read operations**. For example, when there are separate tables for orders and customers, duplicating customer name and address in the orders table can expedite queries that require customer information.
+
+2. `Combining tables` : Another form of denormalization involves **combining multiple tables into one**. This allows retrieving related data in a single query, thereby **enhancing performance**. For instance, combining the order table and product table allows retrieving information about ordered products more efficiently.
+
+3. `Eliminating splits` : Denormalization sometimes involves **reversing the splits caused by normalization**. In a normalized database, querying data often requires joining multiple tables, which can degrade performance. In such cases, denormalization involves merging the normalized tables back into one, leading to performance improvements.
+
+- It's important to exercise caution when applying denormalization. **Increased data redundancy** requires additional efforts to **maintain data consistency**, and updating duplicated data consistently becomes crucial. Additionally, denormalization is a performance-oriented technique, so its application should be carefully considered based on the specific circumstances.
+
+## Schema in Database System
+1. `External Schema` : The external schema defines **how users or applications interact with the database**. For example, in a bank, there are three groups of people: bank tellers, customers, and managers, each using the bank system in different ways. The external schema would define the information that tellers see, what customers see, and what managers see. Bank tellers may need to view and process account transactions, customers may need to check their account balance and transaction history, while managers may need access to comprehensive reports.
+
+2. `Conceptual Schema` : The conceptual schema represents **the overall structure of the database**. It describes all the data and their relationships within the database. For instance, a database may contain various bank accounts and associated transaction records. The conceptual schema defines how these **accounts and transactions are stored and related to each other**. It ensures that multiple users and applications can share the database while maintaining data consistency. The conceptual schema is typically represented using models like ER diagrams or UML diagrams.
+
+3. `Internal Schema`: The internal schema defines the `physical structure of the database`. It specifies the actual format of data stored on **disk**, **storage methods**, index **structures**, and other low-level details. The internal schema deals with the internal workings and performance aspects of the database system. Generally, it is managed by the database system itself, and users or applications do not directly interact with it.
