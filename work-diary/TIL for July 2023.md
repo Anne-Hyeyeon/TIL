@@ -128,3 +128,17 @@ WAS is a middleware platform specifically designed to **host and manage web appl
 2. `Conceptual Schema` : The conceptual schema represents **the overall structure of the database**. It describes all the data and their relationships within the database. For instance, a database may contain various bank accounts and associated transaction records. The conceptual schema defines how these **accounts and transactions are stored and related to each other**. It ensures that multiple users and applications can share the database while maintaining data consistency. The conceptual schema is typically represented using models like ER diagrams or UML diagrams.
 
 3. `Internal Schema`: The internal schema defines the `physical structure of the database`. It specifies the actual format of data stored on **disk**, **storage methods**, index **structures**, and other low-level details. The internal schema deals with the internal workings and performance aspects of the database system. Generally, it is managed by the database system itself, and users or applications do not directly interact with it.
+
+
+# 2023-07-13
+## Process status
+- The "process status" generally refers to the current state or condition of a process, which could be a task, operation, or workflow.
+-  It indicates where the process stands in terms of progress, completion, or any other relevant status indicators. The specific details and interpretation of process status can vary depending on the context and the nature of the process being considered.
+
+### Common process status
+1. `Not Started` : The process or task has **not yet begun**.
+2. `In Progress` : The process is currently **being worked on and is actively in motion**.
+3. `On Hold` : The process has been temporarily **paused or delayed** for some reason.
+4. `Completed` : The process has been **finished or fulfilled** successfully.
+5. `Failed` : The process was attempted **but encountered an error** or did not meet the desired outcome.
+6. `Pending` : The process is waiting for some **prerequisite or external factor** to be fulfilled before it can proceed.
