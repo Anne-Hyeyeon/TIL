@@ -148,7 +148,7 @@ WAS is a middleware platform specifically designed to **host and manage web appl
 ## A hashing function
 - A hashing function is a simple yet powerful algorithm that **takes an input and produces a fixed-size output**, known as a hash value or hash code. The purpose of a hashing function is to quickly and efficiently map data of arbitrary size to a unique numerical value. This process is often used for data storage, data retrieval, or data validation.
 
-- - Imagine you have a magical box. You can put any item into the box, regardless of its size, and the box will magically transform it into a small, fixed-size package. This package is the hash value. No matter how big or small the original item was, the package will always have the same size.
+- Imagine you have a magical box. You can put any item into the box, regardless of its size, and the box will magically transform it into a small, fixed-size package. This package is the hash value. No matter how big or small the original item was, the package will always have the same size.
 
 Now, the magical part is that the box has a special property. If you put the same item into the box multiple times, it will always produce the same package. However, even a tiny change in the item will result in a completely different package.
 
