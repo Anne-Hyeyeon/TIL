@@ -155,7 +155,3 @@ Now, the magical part is that the box has a special property. If you put the sam
 In other words, a hashing function takes any kind of data, such as a text string or a file, and applies a series of calculations to transform it into a unique fixed-size package. This package is commonly used to represent the original data in a concise and secure manner.
 
 Hashing functions have various applications. They are widely used in computer science, cryptography, and data storage systems. They help with tasks such as password storage, data integrity checks, data indexing, and fast data retrieval.
-
-
-# 2023-07-17
-Why do different values occur when using useSelector to retrieve data from the Redux store in different files, even though it's the same data? What could be causing this phenomenon? Could it be due to the difference between the TypeScript module file (.ts) and the component file (.tsx)? I should investigate this further next time...!!!!!
