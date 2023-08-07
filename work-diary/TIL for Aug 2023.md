@@ -61,3 +61,48 @@ const generatorArray = Array.from(generateNumbers()); // [1, 2, 3]
 
 ```
 `Array.from` is a convenient way to convert iterable objects into arrays. It provides an easy method to transform and work with various data types as arrays.
+
+
+# 2023-08-07
+## useLoaderData Hook
+
+This hook provides the value returned from your route loader.
+
+```tsx
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useLoaderData,
+} from "react-router-dom";
+
+function loader() {
+  return fetchFakeAlbums();
+}
+
+export function Albums() {
+  const albums = useLoaderData();
+  // ...
+}
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    loader: loader,
+    element: <Albums />,
+  },
+]);
+
+ReactDOM.createRoot(el).render(
+  <RouterProvider router={router} />
+);
+```
+
+`useLoaderData` is a hook provided by React Router. It automatically refreshes data after route actions are called and returns the latest results from the loader.
+
+It's important to note that `useLoaderData` doesn't start fetching data itself. It simply reads the results of a fetch managed internally by React Router. This means you don't need to worry about refetching when it rerenders for reasons other than routing.
+
+As a result, the returned data remains stable between renders, making it safe to pass to dependency arrays in React hooks like `useEffect`. The data only changes when the loader is called again after actions or specific navigations. Even if the values don't change, the identity will change in these cases.
+
+You can use this hook not only in Route elements but also in any component or custom hook. It retrieves data from the nearest route in the context.
+
+
