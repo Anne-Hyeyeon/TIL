@@ -106,3 +106,63 @@ As a result, the returned data remains stable between renders, making it safe to
 You can use this hook not only in Route elements but also in any component or custom hook. It retrieves data from the nearest route in the context.
 
 
+# 2023-08-08
+## What should we use instead of &&?
+1. Using ternary expressions
+```js
+function ComponentWithTernary({ list }) {
+  return (
+    <div>
+      {list.length > 0 ? (
+        <ul>
+          {list.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>No items to display.</p>
+      )}
+    </div>
+  );
+}
+```
+
+2. Use !!list.length
+```js
+function ComponentWithDoubleNegation({ list }) {
+  return (
+    <div>
+      {!!list.length && (
+        <ul>
+          {list.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+```
+
+3. Use list.length >= 1
+```js
+function ComponentWithAndAndLength({ list }) {
+  return (
+    <div>
+      {list.length >=1 && (
+        <ul>
+          {list.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+```
+
+ _TIPS(from_ [_MDN_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND)_): The logical AND (&&) operator (logical conjunction) for a set of boolean operands will be true if and only if all the operands are true. Otherwise it will be false._
+> 
+> ==_More generally, the operator returns the value of the first falsy operand encountered when evaluating from left to right, or the value of the last operand if they are all truthy.
+
+- reference : https://medium.com/javascript-in-plain-english/its-2023-please-stop-using-for-conditional-rendering-in-react-b588a09ebb17
