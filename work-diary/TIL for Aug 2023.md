@@ -166,3 +166,26 @@ function ComponentWithAndAndLength({ list }) {
 > ==_More generally, the operator returns the value of the first falsy operand encountered when evaluating from left to right, or the value of the last operand if they are all truthy.
 
 - reference : https://medium.com/javascript-in-plain-english/its-2023-please-stop-using-for-conditional-rendering-in-react-b588a09ebb17
+
+# 2023-08-09
+## React.memo
+### What is React.memo?
+- `React.memo is a **higher-order component (HOC)** in React that is used for **optimizing functional components** by **preventing unnecessary re-renders**.
+- It works by memoizing the rendered output of a component and reusing it if the component's props have not changed.
+- This can help improve the performance of your application by avoiding unnecessary renders when the component's output would be the same as before.
+
+### example
+```jsx
+import React from 'react';
+
+const MyComponent = React.memo(({ prop1, prop2 }) => {
+  // Component rendering logic...
+});
+
+export default MyComponent;
+```
+In the above example, the MyComponent functional component will only re-render if its **prop1 or prop2 props have changed**. If the props remain the same between renders, the memoized version of the component's output will be reused, saving unnecessary render cycles.
+
+### What is the difference between React.memo and useMemo hook?
+- React.memo and useMemo are both **techniques in React that deal with optimization**, but they serve different purposes and are used in different contexts.
+- React.memo is used to optimize the rendering of functional components by preventing unnecessary re-renders based on props, while useMemo is used to optimize the performance of computations within functional components by memoizing the results of those computations based on dependencies.
