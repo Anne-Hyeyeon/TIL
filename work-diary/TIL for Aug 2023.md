@@ -189,3 +189,21 @@ In the above example, the MyComponent functional component will only re-render i
 ### What is the difference between React.memo and useMemo hook?
 - React.memo and useMemo are both **techniques in React that deal with optimization**, but they serve different purposes and are used in different contexts.
 - React.memo is used to optimize the rendering of functional components by preventing unnecessary re-renders based on props, while useMemo is used to optimize the performance of computations within functional components by memoizing the results of those computations based on dependencies.
+
+
+# 2023-08-11 
+## How to flatten an Array? (small tip)
+I came across this in a Medium article, and I was surprised I hadn't known about it until now :p"
+- To transform a **nested array into a single-level array** in JavaScript, the `flat()` function can be utilized.
+- This function produces a new array by **merging the elements of sub-arrays into it**, up to a given level of depth.
+
+```js
+const nestedArray = [[10, 20], [30, 40, [50, 60, [70, 80]]]];
+
+const singleLevelArray = nestedArray.flat(3);
+
+console.log(singleLevelArray); // Output: [10, 20, 30, 40, 50, 60, 70, 80]
+```
+- In the given code, nestedArray is a complex array with multiple layers of nested arrays, some reaching as deep as three levels.
+- By invoking the `flat()` function and specifying a depth of 3, we merge all the elements from the sub-arrays into a unified array.
+- As a result, singleLevelArray holds all the elements from the original nested structure in a one-dimensional format.
