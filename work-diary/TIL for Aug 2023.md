@@ -207,3 +207,45 @@ console.log(singleLevelArray); // Output: [10, 20, 30, 40, 50, 60, 70, 80]
 - In the given code, nestedArray is a complex array with multiple layers of nested arrays, some reaching as deep as three levels.
 - By invoking the `flat()` function and specifying a depth of 3, we merge all the elements from the sub-arrays into a unified array.
 - As a result, singleLevelArray holds all the elements from the original nested structure in a one-dimensional format.
+
+
+# 2023-08-16
+## namespace, interface
+- Namespace: A namespace is one of TypeScript's features for structuring and modularizing code. Namespaces are used to group related code without polluting the global scope. They are especially helpful in large projects to avoid conflicts between modules and organize code. Within a namespace, you can define components such as classes, functions, variables, and then access them using the name of the namespace.
+
+```ts
+namespace MyNamespace {
+    export interface MyInterface {
+        // ...
+    }
+    export class MyClass {
+        // ...
+    }
+}
+const instance = new MyNamespace.MyClass();
+```
+
+- Interface: An interface in TypeScript is an abstract structure used to define types. It is mainly used to specify the shape of objects or the methods and properties a class should implement. Interfaces are useful for interacting with other types or specifying that a class follows a certain format. They define an abstract contract in the code, and the actual implementation is done in another class.
+```ts
+interface Car {
+    brand: string;
+    model: string;
+    startEngine(): void;
+}
+
+class ElectricCar implements Car {
+    brand: string;
+    model: string;
+
+    constructor(brand: string, model: string) {
+        this.brand = brand;
+        this.model = model;
+    }
+
+    startEngine() {
+        console.log("Electric engine started.");
+    }
+}
+
+```
+- In simple terms, namespaces are used for code structuring, and interfaces are used for type definitions. Namespaces are primarily used for modularization, and interfaces define the shape of structured data or the convention of a class.
