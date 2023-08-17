@@ -256,9 +256,9 @@ class ElectricCar implements Car {
 ## Directly Calling vs. Dispatching Redux Actions: What's the Difference?
 
 ### Question
-```
-`fetchAppData()` is a function exported from `utils.ts`. It's being used in `settingSystemAction` through an import and is dispatched in several pages. Is it possible to directly call `fetchAppData()` from the pages instead of dispatching it? Would there be any issues with that approach?
-```
+- `fetchAppData()` is a function exported from `utils.ts`. It's being used in `settingSystemAction` through an import and is dispatched in several pages.
+- Is it possible to directly call `fetchAppData()` from the pages instead of dispatching it? Would there be any issues with that approach?
+
 
 ### Answer
 - If `fetchAppData()` is an asynchronous action created with Redux's `createAsyncThunk` or another Redux helper, it's designed to interact with the Redux store. Directly invoking this action creator isn't problematic by itself, but doing so won't affect the Redux store.
