@@ -249,3 +249,27 @@ class ElectricCar implements Car {
 
 ```
 - In simple terms, namespaces are used for code structuring, and interfaces are used for type definitions. Namespaces are primarily used for modularization, and interfaces define the shape of structured data or the convention of a class.
+
+
+
+# 2023-08-17
+## Directly Calling vs. Dispatching Redux Actions: What's the Difference?
+
+### Question
+```
+`fetchAppData()` is a function exported from `utils.ts`. It's being used in `settingSystemAction` through an import and is dispatched in several pages. Is it possible to directly call `fetchAppData()` from the pages instead of dispatching it? Would there be any issues with that approach?
+```
+
+### Answer
+- If `fetchAppData()` is an asynchronous action created with Redux's `createAsyncThunk` or another Redux helper, it's designed to interact with the Redux store. Directly invoking this action creator isn't problematic by itself, but doing so won't affect the Redux store.
+
+- In other words, if you call `fetchAppData()` directly, it may perform the internal API call as defined, but the returned data will not be stored in the Redux store, nor will there be any state updates or other side effects in Redux.
+
+### To summarize:
+
+1. Directly invoking `fetchAppData()` won't impact the Redux store.
+2. Using `dispatch(fetchAppData())` will update the Redux store's state based on the result (success or failure) of `fetchAppData()`.
+
+- This behavior applies only if `fetchAppData` is a function designed to handle asynchronous operations related to Redux.
+
+- Therefore, if you use the `fetchAppData()` function directly on a page, there's a high likelihood it won't behave as expected. If your reason for doing so is performance optimization or another specific scenario, it might be worth reconsidering the logic or finding an alternative approach.
