@@ -273,3 +273,49 @@ class ElectricCar implements Car {
 - This behavior applies only if `fetchAppData` is a function designed to handle asynchronous operations related to Redux.
 
 - Therefore, if you use the `fetchAppData()` function directly on a page, there's a high likelihood it won't behave as expected. If your reason for doing so is performance optimization or another specific scenario, it might be worth reconsidering the logic or finding an alternative approach.
+- 
+
+# 2023-08-18
+## 깊은 오브젝트 비교 함수 (재귀함수 연습)
+
+```ts
+export function compareDeeply<T extends { [keyStr: string]: any }>(inputData: T, baselineData: T): Partial<T> {
+  function findDifferences(sourceObj: any, compareObj: any): any {
+    // Declare the result object
+    const differenceResult: any = {};
+
+    for (const keyStr in sourceObj) {
+      // Check if the current keyStr is a unique property of sourceObj
+      if (Object.prototype.hasOwnProperty.call(sourceObj, keyStr)) {
+        // Get the values of the current keyStr from both sourceObj and compareObj
+        const valueFromSource = sourceObj[keyStr];
+        const valueToCompare = compareObj[keyStr];
+
+        // If both valueFromSource and valueToCompare are objects and not arrays
+        if (
+          valueFromSource &&
+          valueToCompare &&
+          typeof valueFromSource === 'object' &&
+          typeof valueToCompare === 'object' &&
+          !Array.isArray(valueFromSource) &&
+          !Array.isArray(valueToCompare)
+        ) {
+          // Recursively compare the values of valueFromSource and valueToCompare
+          const nestedDifference = findDifferences(valueFromSource, valueToCompare);
+          // If differences are found, add them to the result object
+          if (Object.keys(nestedDifference).length) {
+            differenceResult[keyStr] = nestedDifference;
+          }
+          // If valueFromSource and valueToCompare are not objects or are arrays
+        } else if (!isEqual(valueFromSource, valueToCompare)) {
+          // Directly add the value from valueFromSource to the result object
+          differenceResult[keyStr] = valueFromSource;
+        }
+      }
+    }
+    return differenceResult;
+  }
+
+  return findDifferences(inputData, baselineData);
+}
+```
