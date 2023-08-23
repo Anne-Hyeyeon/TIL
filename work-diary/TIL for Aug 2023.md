@@ -338,3 +338,41 @@ export function compareDeeply<T extends { [keyStr: string]: any }>(inputData: T,
 In conclusion, if **performance considerations** are crucial, it might be better to use a **for loop** or another iterative structure over recursion. However, for **simplicity, readability, and maintainability**, **recursion** might be more suitable in certain situations.
 
 The actual performance difference can depend on the specific problem, implementation, the language used, and other factors. Therefore, if performance is crucial, it's recommended to implement using both approaches and conduct performance tests to choose the optimal method.
+
+
+# 2023-08-23
+## Difference between directly using `props` and using `destructuring`
+
+```js
+const MyComponent = (props) => {
+    return (
+        <div>
+            <p>{props.name}</p>
+            <button onClick={props.handleClick}>Click Me</button>
+        </div>
+    );
+}
+```
+
+```js
+const MyComponent = ({ name, handleClick }) => {
+    return (
+        <div>
+            <p>{name}</p>
+            <button onClick={handleClick}>Click Me</button>
+        </div>
+    );
+}
+```
+
+1. **Readability and Clarity**:
+- Using destructuring makes it easy to identify at the top of the code which `props` the component expects and takes in. This provides clear visibility to the reader about the `props` the component depends on, enhancing readability.
+- Conversely, using `props` directly can lengthen the code when referencing nested objects or arrays. For instance, you'd have something like `props.state.data.length`, which becomes lengthy.
+2. **Code Brevity**:
+- With destructuring, you can directly use each prop as a variable without repeatedly referencing it.
+- For example, you can destructure `props` as `{ state, handlers, setTab }`, and in the subsequent code, you can use it in a concise manner like `state.data.length` or `handlers.refresh()`.
+3. **Compatibility with TypeScript**:
+- If you're using TypeScript, destructuring becomes particularly useful when defining the types of `props` for a component. It allows for clear type checking for each `prop`.
+- In conclusion, **there's no substantive performance difference between the two methods.** The choice typically hinges on the developer's preference, code readability, and the coding style guide of the project.
+- props를 그대로 썼을 때와 그렇지 않을 때의 성능 차이가 궁금했는데, 가독성과 간결성을 제외하고는 별 차이 없다고 한다. 다만, TS쓸 때는 props를 구조분해할당하여 타입을 체킹하는 게 더 간편하다.
+``
