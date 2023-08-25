@@ -376,3 +376,25 @@ const MyComponent = ({ name, handleClick }) => {
 - In conclusion, **there's no substantive performance difference between the two methods.** The choice typically hinges on the developer's preference, code readability, and the coding style guide of the project.
 - props를 그대로 썼을 때와 그렇지 않을 때의 성능 차이가 궁금했는데, 가독성과 간결성을 제외하고는 별 차이 없다고 한다. 다만, TS쓸 때는 props를 구조분해할당하여 타입을 체킹하는 게 더 간편하다.
 ``
+
+
+# 2023-08-25
+## What's the difference between directly calling Object.prototype.hasOwnProperty and not doing so?
+
+### 1. data.hasOwnProperty('adUse'):
+- This is attempting to call the `hasOwnProperty` method **directly** on the data object.
+- The problem with this approach is if there's another **property or method named hasOwnProperty on the data object or its prototype chain**, it could overshadow the original hasOwnProperty method.
+- For instance, if there's a different value assigned to the hasOwnProperty name on the data object, the code data.hasOwnProperty('adUse') wouldn't work as expected.
+```ts
+  const data = {
+  adUse: true,
+  hasOwnProperty: 'Oops! I am not a function anymore!'
+};
+
+console.log(data.hasOwnProperty('adUse')); // Error!
+```
+
+### 2. Object.prototype.hasOwnProperty.call(data, 'adUse'):
+- This method directly retrieves and uses the hasOwnProperty method from **Object.prototype**.
+- By using .call(data, 'adUse'), it specifies the data object as the target of the method, passing 'adUse' as an argument.
+- This way, regardless of any property on the data object, you're always using the original hasOwnProperty method from Object.prototype to check.
