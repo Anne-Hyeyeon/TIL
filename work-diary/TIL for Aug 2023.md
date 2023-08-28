@@ -398,3 +398,38 @@ console.log(data.hasOwnProperty('adUse')); // Error!
 - This method directly retrieves and uses the hasOwnProperty method from **Object.prototype**.
 - By using .call(data, 'adUse'), it specifies the data object as the target of the method, passing 'adUse' as an argument.
 - This way, regardless of any property on the data object, you're always using the original hasOwnProperty method from Object.prototype to check.
+
+
+# 2023-08-28
+## Overriding (Java)
+
+In Java, Overriding refers to the act of **redefining a method in a child class** that has already been defined in the parent class.
+
+
+```java
+class Animal {
+  void move() {
+    System.out.println("Animals move.");
+  }
+}
+
+class Bird extends Animal {
+  // Overriding
+  void move() {
+    System.out.println("Birds fly.");
+  }
+}
+
+public class Test {
+  public static void main(String[] args) {
+    Animal myAnimal = new Animal();
+    Animal myBird = new Bird();
+
+    myAnimal.move();  // Output: "Animals move."
+    myBird.move();  // Output: "Birds fly."
+  }
+}
+```
+- For example, let's assume that the parent class has a method called move() that says, "Animals move." Now, in a "Bird" class that inherits from this Animal class, you can rewrite the move() method to say, "Birds fly." When an object of the "Bird" class calls the move() method, it will output "Birds fly," ignoring the parent class's "Animals move."
+
+- Through overriding, you can implement various behaviors using the same method name.
