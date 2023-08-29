@@ -433,3 +433,62 @@ public class Test {
 - For example, let's assume that the parent class has a method called move() that says, "Animals move." Now, in a "Bird" class that inherits from this Animal class, you can rewrite the move() method to say, "Birds fly." When an object of the "Bird" class calls the move() method, it will output "Birds fly," ignoring the parent class's "Animals move."
 
 - Through overriding, you can implement various behaviors using the same method name.
+
+
+# 2023-08-29
+## When Should I Use 'useCallback' in a React Component?
+
+The primary reason for using useCallback is to prevent unnecessary re-renders and enhance performance. Each time a function component re-renders, a new function is created. If this function is passed as a dependency to other Hooks or components, those may also re-render.
+
+However, you don't have to use useCallback in every case. Here are some considerations:
+
+1. `Frequency of Re-rendering`: Check if your component re-renders frequently. If not, the likelihood is you don't need to use useCallback.
+
+```jsx
+import React, { useState, useCallback } from 'react';
+
+const ChildComponent = ({ action }) => {
+  console.log('ChildComponent 렌더링');
+  return (
+    <button onClick={action}>
+      Click Me
+    </button>
+  );
+};
+
+const ParentComponent = () => {
+  const [count, setCount] = useState(0);
+  const [text, setText] = useState('');
+
+  const increment = useCallback(() => {
+    setCount((prevCount) => prevCount + 1);
+  }, []);
+
+  console.log('ParentComponent 렌더링');
+
+  return (
+    <div>
+      <h1>{count}</h1>
+      <ChildComponent action={increment} />
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+    </div>
+  );
+};
+
+export default ParentComponent;
+
+// 부모에서 함수 사용했는데 자식에서 리렌더링 되는 현상을 방지
+```
+
+
+3. `Size and Frequency of the Dependency Array`: The usefulness of useCallback may vary depending on how often the values in the dependency array change and how large the array is.
+
+4. `Function Complexity` : If the function is quite complex and time-consuming, it might be useful to use useCallback to reuse a previously created function.
+
+5. ⭐⭐⭐`Passing to Child Components`: If you are passing this function as a prop to a child component and that child component is optimized with React.memo, then it’s beneficial to use useCallback.
+
+In the case of the onRegistryUser function you shared, it contains asynchronous logic and state changes, making it complex. If this function is frequently called, or if there are frequent re-renders or it’s passed to child components, then using useCallback may be beneficial. Otherwise, it might not be necessary.
