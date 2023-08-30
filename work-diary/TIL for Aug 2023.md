@@ -492,3 +492,22 @@ export default ParentComponent;
 5. ⭐⭐⭐`Passing to Child Components`: If you are passing this function as a prop to a child component and that child component is optimized with React.memo, then it’s beneficial to use useCallback.
 
 In the case of the onRegistryUser function you shared, it contains asynchronous logic and state changes, making it complex. If this function is frequently called, or if there are frequent re-renders or it’s passed to child components, then using useCallback may be beneficial. Otherwise, it might not be necessary.
+
+
+# 2023-08-30
+## Foreign Key
+### What is Forign Key? 
+- In a Relational Database (RDB), a Foreign Key is a field (or a set of fields) in one table that **references the Primary Key** in another table. Foreign keys are used to ensure **data integrity** and play a crucial role in **maintaining Referential Integrity**.
+
+### Key Functions of a Foreign Key:
+1. **Ensuring Referential Integrity**: A column with a foreign key constraint can only have values that exist in the primary key column of the referenced table. This prevents incorrect or inaccurate data from being stored in the database.
+2. **Establishing Relationships**: Foreign keys establish relationships between tables, allowing for efficient execution of JOIN operations.
+
+### Example:
+For instance, if there are Students and Courses tables, an Enrollments table can link these two tables together.
+
+- The StudentID in the Students table serves as its Primary Key.
+- The CourseID in the Courses table serves as its Primary Key.
+- The StudentID and CourseID in the Enrollments table act as Foreign Keys, referencing the Primary Keys in the Students and Courses tables, respectively.
+
+By doing this, the Enrollments table effectively represents which students are enrolled in which courses, while also ensuring data integrity.
