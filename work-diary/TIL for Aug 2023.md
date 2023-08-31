@@ -554,7 +554,7 @@ console.log(person.toString()); // "[object Person: Alice]"
 
 - By using this approach, you can get the desired string representation when converting an object to a string.
 
-- ### How to avoid this?
+### How to avoid this?
 
 1. Using JSON.stringify: You can convert an object to a JSON string.
 ```ts
@@ -574,3 +574,7 @@ obj.toString = function() {
 console.log(String(obj));  // Output: key: value
 ```
 By using one of these methods, you can obtain the string representation you desire instead of getting "[object Object]".
+
+
+
+8월이 끝났다..잘가...ㅠㅠ
