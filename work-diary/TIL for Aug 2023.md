@@ -511,3 +511,66 @@ For instance, if there are Students and Courses tables, an Enrollments table can
 - The StudentID and CourseID in the Enrollments table act as Foreign Keys, referencing the Primary Keys in the Students and Courses tables, respectively.
 
 By doing this, the Enrollments table effectively represents which students are enrolled in which courses, while also ensuring data integrity.
+
+
+# 2023-08-31
+## `[object Object]`
+```ts
+const obj = { key: 'value' };
+console.log(obj.toString());  // 출력: [object Object]
+console.log(String(obj));     // 출력: [object Object]
+```
+
+### What is Object object?
+The string "[object Object]" is the default form that appears when an **object is converted to a string in JavaScript**. This phenomenon occurs because the object inherits the .toString() method. In JavaScript, the .toString() method of an object returns "[object Object]" by default.
+
+```ts
+console.log("My object is: " + obj);  // 출력: My object is: [object Object]
+```
+
+### `[object Object]` related to prototype chain in JS
+
+- The appearance of "[object Object]" when converting an object to a string in JavaScript is actually related to the **prototype chain**. All objects in JavaScript inherit methods and properties from Object.prototype. Included in Object.prototype is a method called .toString(), which serves to convert the object into a string.
+
+By default, the Object.prototype.toString() method returns the string "[object Object]". This method operates as follows:
+
+1. It identifies the object's class. Here, "class" refers to the internal [[Class]] property, as defined in the ECMAScript specification.
+2. It concatenates "object" and the class name to return a string in the form of "[object ClassName]".
+
+- As a result, if an object has not explicitly overridden the `.toString()` method, calling Object.prototype.toString() will return "[object Object]".
+- Other built-in types often override .toString(). For example, arrays have Array.prototype.toString(), which returns a string that joins the array elements with commas when converting the array to a string.
+You can also override .toString() to produce the behavior you want. For example:
+
+```ts
+const person = {
+  name: "Alice",
+  toString: function() {
+    return `[object Person: ${this.name}]`;
+  }
+};
+
+console.log(person.toString()); // "[object Person: Alice]"
+```
+
+- By using this approach, you can get the desired string representation when converting an object to a string.
+
+- ### How to avoid this?
+
+1. Using JSON.stringify: You can convert an object to a JSON string.
+```ts
+console.log("My object is: " + JSON.stringify(obj));  // Output: My object is: {"key":"value"}
+```
+
+2. Using Template Literals: In ES6 and above, you can use Template Literals to easily insert an object as a string.
+```ts
+Using Template Literals: In ES6 and above, you can use Template Literals to easily insert an object as a string.
+```
+
+3. Defining a Custom .toString() Method: You can define a custom .toString() method for the object to return the string representation you desire.
+```ts
+obj.toString = function() {
+  return "key: " + this.key;
+};
+console.log(String(obj));  // Output: key: value
+```
+By using one of these methods, you can obtain the string representation you desire instead of getting "[object Object]".
