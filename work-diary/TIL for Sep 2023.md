@@ -1,4 +1,5 @@
-![image](https://github.com/Anne-Hyeyeon/TIL/assets/93920435/730b3db7-9c98-4de2-b8bd-135d252e9b7b)# 2023-09-01
+# 2023-09-01
+![image](https://github.com/Anne-Hyeyeon/TIL/assets/93920435/730b3db7-9c98-4de2-b8bd-135d252e9b7b)
 ## 컴파일 타입 체크 (Compile-time type Check)
 타입스크립트에서는 기본으로 두 종류의 타입 체크가 있다.
 
@@ -29,3 +30,43 @@
 7. **클래스*: 클래스의 프로퍼티나 메서드, 생성자 등의 타입은 컴파일할 때 검사한다. 클래스 자체는 런타임에도 존재하고, 인스턴스를 만들면 해당 타입의 객체가 런타임에 생성된다.
 
 
+## 2023-09-11
+## Named Exports
+Named exports are a feature of JavaScript's ES6 module system that allows multiple values to be exported from a single module.
+
+### Characteristics:
+`Clarity`: Each export has its own unique name. This provides clarity for the module's users about what values they can import from it.
+`Multiple Value Exports` : A module can export multiple values.
+`Destructuring` : When using named exports, one can utilize destructuring to selectively import the values they want.
+
+### How to use:
+- Exporting:
+```js
+// module.js
+export const functionA = () => { /* ... */ }
+export const functionB = () => { /* ... */ }
+export const valueC = 123;
+```
+
+- importing: 
+```js
+// anotherModule.js
+import { functionA, functionB, valueC } from './module';
+```
+
+- Rename the imports:
+```js
+import { functionA as newFunctionA, functionB } from './module';
+```
+
+### Pros and Cons:
+1)Pros:
+- Useful when you have multiple values to export.
+- Provides clear visibility to readers about what the module offers.
+- Provides flexibility by allowing selective imports of functions or values.
+
+2) Cons:
+- You have to use the exact name as it was exported (although renaming is possible).
+- an sometimes add **unnecessary complexity**, especially if a module exports a large number of values.
+In conclusion, named exports are beneficial when a module needs to provide multiple values, especially when **each value has a clear meaning and role**.
+- However, there are cases where it might be more appropriate to export just a single value or main functionality. It's important to choose the right approach based on the situation.
