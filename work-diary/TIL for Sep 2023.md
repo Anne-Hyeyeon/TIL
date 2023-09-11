@@ -30,7 +30,8 @@
 7. **클래스*: 클래스의 프로퍼티나 메서드, 생성자 등의 타입은 컴파일할 때 검사한다. 클래스 자체는 런타임에도 존재하고, 인스턴스를 만들면 해당 타입의 객체가 런타임에 생성된다.
 
 
-## 2023-09-11
+
+# 2023-09-11
 ## Named Exports
 Named exports are a feature of JavaScript's ES6 module system that allows multiple values to be exported from a single module.
 
