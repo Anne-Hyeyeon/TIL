@@ -71,3 +71,38 @@ import { functionA as newFunctionA, functionB } from './module';
 - an sometimes add **unnecessary complexity**, especially if a module exports a large number of values.
 In conclusion, named exports are beneficial when a module needs to provide multiple values, especially when **each value has a clear meaning and role**.
 - However, there are cases where it might be more appropriate to export just a single value or main functionality. It's important to choose the right approach based on the situation.
+
+
+# 2023-09-14
+## clean-up logic on useEffect
+
+### What is the Cleanup Logic?
+- When using the useEffect hook, you might create subscriptions, timers, or even manually manipulate the DOM. Over the life of a component, these side effects might need to be cleaned up to prevent memory leaks, unhandled events, or unexpected behaviors.
+
+- To specify this cleanup, the function passed to useEffect can return a function. This returned function is the cleanup function.
+
+### When does the Cleanup Logic Run?
+- Before re-running the side effect: If the useEffect hook has dependencies and the dependencies change, before running the effect again, React will first perform the cleanup of the previous effect.
+
+- Component Unmount: When the component using the effect is removed from the UI, React ensures the cleanup function is called. This behavior ensures that any lingering side effects are disposed of before the component is fully unmounted.
+
+```ts
+useEffect(() => {
+    // This might be a subscription to a data stream or event listeners, etc.
+    const subscription = someService.subscribe(data => {
+        // Do something with the data
+    });
+
+    // Cleanup logic
+    return () => {
+        // Unsubscribe when the component unmounts or if the effect reruns
+        subscription.unsubscribe();
+    };
+}, []); // Empty dependency array means this effect runs once on mount and the cleanup runs on unmount
+```
+
+### Important Note:
+If your useEffect does not have a cleanup function and **you're seeing memory leaks or unexpected behavior**, it's possible you need to add one. On the other hand, if you have a cleanup function but are experiencing performance issues or flickering, it's possible that your useEffect is running more often than necessary. **Always ensure your dependency array is correctly specified to prevent effects** and their cleanup from running excessively.
+
+- Remember, the goal of the cleanup function is **to reset everything to its original state** or to ensure that no lingering side effects remain. It's an essential tool in ensuring the robustness of React components that deal with side effects.
+- 
