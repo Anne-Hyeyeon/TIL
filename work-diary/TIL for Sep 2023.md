@@ -105,4 +105,28 @@ useEffect(() => {
 If your useEffect does not have a cleanup function and **you're seeing memory leaks or unexpected behavior**, it's possible you need to add one. On the other hand, if you have a cleanup function but are experiencing performance issues or flickering, it's possible that your useEffect is running more often than necessary. **Always ensure your dependency array is correctly specified to prevent effects** and their cleanup from running excessively.
 
 - Remember, the goal of the cleanup function is **to reset everything to its original state** or to ensure that no lingering side effects remain. It's an essential tool in ensuring the robustness of React components that deal with side effects.
-- 
+
+
+
+# 2023-09-15
+## Class Naming Conventions for Better Code
+
+1. `Make it meaningful`: The className should reflect the **purpose or content** of the element. For example, for a div representing a user's profile picture, you might use a name like profile-picture.
+
+2. `Consider using BEM` (Block Element Modifier): BEM is one of the well-known methodologies for naming CSS classes. The main principles of BEM are:
+
+### BEM
+- Block: An independent entity (e.g., button)
+- Element: A component within the block (e.g., button__icon)
+- Modifier: A variant or state of the block or element (e.g., button--large)
+- Short but clear: Class names should be concise yet clear in conveying the purpose or content of the element. E.g.: btn-submit, header-title
+
+3. `Use kebab-case`: CSS class names typically use **kebab-case** (words in lowercase connected by hyphens). E.g.: user-profile, main-content
+
+4. `Avoid names related to structure`: Avoid names related to layout or position like **left, right, top, bottom**. This is because if the design or layout changes, these names may no longer be appropriate.
+
+5. `Use names related to state` : For classes representing a **state or change**, use names indicating the state such as **active, disabled, collapsed**.
+
+6. `Maintain consistency` in your code: It's crucial to use consistent naming conventions throughout the project. For instance, if you're using the prefix btn for all buttons, stick to it consistently.
+
+- Following these principles enhances code readability, facilitates collaboration among team members, and helps in easily understanding the purpose or state of an element when modifying CSS or JS in the future.
