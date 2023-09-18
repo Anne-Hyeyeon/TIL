@@ -130,3 +130,44 @@ If your useEffect does not have a cleanup function and **you're seeing memory le
 6. `Maintain consistency` in your code: It's crucial to use consistent naming conventions throughout the project. For instance, if you're using the prefix btn for all buttons, stick to it consistently.
 
 - Following these principles enhances code readability, facilitates collaboration among team members, and helps in easily understanding the purpose or state of an element when modifying CSS or JS in the future.
+
+```css
+/* 블록 */
+/* Block: Represents the main button */
+.button {
+  background-color: blue;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Element: Text inside the button */
+.button__text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Modifier: A large version of the button */
+.button--large {
+  padding: 15px 30px;
+}
+
+/* Modifier: Button with a red background */
+.button--danger {
+  background-color: red;
+}
+
+/* Modifier: Highlighted text inside the button */
+.button__text--highlighted {
+  font-weight: 700;
+  color: yellow;
+}
+
+/* Modifier: Small text inside the button */
+.button__text--small {
+  font-size: 12px;
+}
+```
