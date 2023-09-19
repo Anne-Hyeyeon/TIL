@@ -171,3 +171,20 @@ If your useEffect does not have a cleanup function and **you're seeing memory le
   font-size: 12px;
 }
 ```
+# 2023-09-19
+## useQuery
+
+
+**useQuery** is a foundational hook provided by React Query for fetching, caching, and syncing asynchronous data in React applications.
+
+1. **Declarative Data Fetching**: By simply providing a key and an asynchronous function, `useQuery` fetches the data and manages its state transitions from loading to success or error.
+
+2. **Caching**: Once data is fetched, `useQuery` automatically caches the result. Subsequent calls with the same key will return the cached data without needing to re-fetch.
+    
+3. **Automatic Refetching**: It supports options for background refetching when the window refocuses or network connectivity is regained.
+    
+4. **Error and Loading States**: `useQuery` provides out-of-the-box states for handling loading and error scenarios.
+    
+5. **Stale Data Handling**: Allows data to be considered "stale" after a certain period, prompting refetches when stale data is accessed.
+    
+6. **Retry Mechanism**: In case of failure, `useQuery` can be configured to retry fetching a certain number of times.
