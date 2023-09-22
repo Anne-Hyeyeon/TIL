@@ -188,3 +188,56 @@ If your useEffect does not have a cleanup function and **you're seeing memory le
 5. **Stale Data Handling**: Allows data to be considered "stale" after a certain period, prompting refetches when stale data is accessed.
     
 6. **Retry Mechanism**: In case of failure, `useQuery` can be configured to retry fetching a certain number of times.
+
+
+
+# 2023-09-22
+## Problem
+-When translating the phrase "원격 연결 IP 입력" into English, the sequence of words changes, primarily due to the word "입력," which translates to "Enter." For instance:
+```
+Korean: 원격 연결 IP 입력
+English: Enter Remote Connection IP
+```
+
+- Similarly, phrases like "SSH on Port 입력," "Telnet on Port 입력," and "Password 입력" will require continual translations for placeholders.
+
+Given this, two approaches arise:
+
+1. Individual Translations: Craft a unique translation for each phrase.
+2. Dynamic Translation Function: Based on the user's language preference stored in localStorage, design a function that positions the word "Enter" appropriately depending on the language version (e.g., moving it to the front for the English version).
+
+## Solving
+
+
+
+**Individual Sentence Translation**: This approach involves pre-saving translations for every sentence. It is very clear and predictable. It also helps in understanding the context of the translated sentences.
+
+**Advantages**:
+
+- **Clarity**: You know exactly how each sentence will be translated.
+- **Flexibility**: There's flexibility in adjusting the translation for each sentence.
+
+**Disadvantages**:
+
+- **Maintenance**: Every time a new sentence is added or an existing one is changed, translations for all languages need to be updated.
+
+**Using a Dynamic Translation Function**: Write a function that offers dynamic translation capabilities for specific words or phrases like "입력". This function changes the sentence structure based on the chosen language.
+
+**Advantages**:
+
+- **Consistency**: The same treatment is applied to all sentences with a consistent structure.
+- **Maintenance**: If new sentences with the same pattern are added, there's no need to add separate translations.
+
+**Disadvantages**:
+
+- **Complexity**: Sentence structures differ among languages, making the function's logic potentially complex.
+- **Exception Handling**: For some sentences, the dynamic conversion logic might not be appropriate.
+
+**Decision Making**:
+
+- If simplicity and predictability are vital, opting for individual translations for each sentence would be best.
+- If you prefer flexibility and automation, then you might choose to use a dynamic translation function.
+
+**Personal Opinion**: Initially, using individual translations for each sentence seems like a better choice. As time goes on and many sentences with similar patterns are added, introducing a dynamic translation function could be considered.
+
+
