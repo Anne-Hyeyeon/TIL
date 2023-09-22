@@ -192,7 +192,9 @@ If your useEffect does not have a cleanup function and **you're seeing memory le
 
 
 # 2023-09-22
-## Problem
+## Comparing Translation Strategies: Individual vs. Dynamic Approach
+
+### Problem
 -When translating the phrase "원격 연결 IP 입력" into English, the sequence of words changes, primarily due to the word "입력," which translates to "Enter." For instance:
 ```
 Korean: 원격 연결 IP 입력
@@ -206,9 +208,7 @@ Given this, two approaches arise:
 1. Individual Translations: Craft a unique translation for each phrase.
 2. Dynamic Translation Function: Based on the user's language preference stored in localStorage, design a function that positions the word "Enter" appropriately depending on the language version (e.g., moving it to the front for the English version).
 
-## Solving
-
-
+### Solving
 
 **Individual Sentence Translation**: This approach involves pre-saving translations for every sentence. It is very clear and predictable. It also helps in understanding the context of the translated sentences.
 
