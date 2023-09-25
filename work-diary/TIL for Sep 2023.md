@@ -241,3 +241,41 @@ Given this, two approaches arise:
 **Personal Opinion**: Initially, using individual translations for each sentence seems like a better choice. As time goes on and many sentences with similar patterns are added, introducing a dynamic translation function could be considered.
 
 
+# 2023-09-25
+## How Flex vs. Width Resizing Impacts Table Layouts in Web Design
+
+### 1. Resizing with Flex:
+
+#### Advantages:
+
+1. **Fluidity**: One of the main benefits of Flexbox is its fluid distribution of space amongst items. It makes adjusting the size of items within a container straightforward.
+2. **Proportional Distribution**: With `flex-grow` and `flex-shrink`, items can automatically adjust based on available space.
+3. **Content-Based Sizing**: Flex items can adjust their size automatically based on their internal content.
+4. **Easy Alignment**: Flexbox makes it easy to center items or align them vertically/horizontally.
+
+#### Disadvantages:
+
+1. **Browser Support**: Older browsers might not fully support Flexbox.
+2. **Complexity**: Some users might find the properties and behavior of Flexbox a bit complicated.
+
+### 2. Resizing with Width:
+
+#### Advantages:
+
+1. **Simplicity**: It's easy to set the width of table columns in pixels, percentages, or other units.
+2. **Predictability**: With a specified width value, the layout behavior is predictable.
+3. **Browser Support**: The `width` property is well-supported across all browsers.
+
+#### Disadvantages:
+
+1. **Lack of Fluidity**: Table columns with a fixed width value might be more challenging to adjust fluidly.
+2. **Manual Adjustments**: You may need to update the code whenever adjustments to the layout are necessary since the width of each column is set manually.
+3. **Content Overflow**: If the content doesn't fit within the specified width, overflow issues can arise.
+
+### Conclusion:
+
+- Using `flex` is advantageous when aiming for a fluid layout and pairs well with responsive design.
+- Using `width` is suitable when you want predictable behavior or precise control over the layout.
+
+Ultimately, the choice depends on the desired functionality, the browsers that need to be supported, and the complexity of development.
+
