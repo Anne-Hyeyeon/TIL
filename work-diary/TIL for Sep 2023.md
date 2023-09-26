@@ -279,3 +279,51 @@ Given this, two approaches arise:
 
 Ultimately, the choice depends on the desired functionality, the browsers that need to be supported, and the complexity of development.
 
+# 2023-09-26
+## :not()
+
+In CSS, `:not()` is a pseudo-class that's used to select elements that do not match the selector specified within its parentheses. The `:not()` pseudo-class represents the negation of the selector list.
+
+#### Basic Usage:
+```css
+/* Selects all p elements that do not have the class "special". */
+p:not(.special) {
+  color: red;
+}
+```
+
+In the example above, the text color of all `p` elements that don't have the `.special` class is set to red.
+
+#### Key Features:
+
+1. **Simple Selectors**: Only simple selectors can be used inside `:not()`. Complex selectors or combinators are not allowed.
+```css
+/* This is valid. */
+div:not(.special) { ... }
+
+/* This is not valid (because of the use of a complex selector). */
+div:not(.special .inner) { ... }
+
+```
+2. **Multiple Conditions**: You can specify multiple conditions at once using `,` (comma).
+```css
+/* Selects p elements that don't have either the .special or .highlight class. */
+p:not(.special, .highlight) {
+    color: blue;
+}
+```
+
+3. **Nested Use**: You can nest `:not()` within another `:not()`.
+```css
+/* Selects a elements that don't have the .special class and are also not in :hover state. */
+a:not(.special):not(:hover) {
+    text-decoration: none;
+}
+```
+
+#### Points to Note:
+
+- The `:not()` pseudo-class was introduced in CSS3, so it might not be supported in older browsers. However, it's widely supported in modern browsers.
+- If you want to use complex selectors, you can consider combining multiple `:not()` pseudo-classes.
+
+
