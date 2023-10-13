@@ -34,4 +34,20 @@
 - **Automate Testing**:
     - Write tests for components and functions using tools like Jest or React Testing Library. This ensures code can be safely deployed with every change.
  
-  
+
+
+# 2023-10-13
+## The reasons why functional programming techniques and for loops often clash
+
+- While removing the for loop as written by the senior developer...
+
+1. **`Immutability`** : Functional programming emphasizes the immutability of data. It operates by **maintaining the original data** and **creating new data** instead of modifying existing data. This immutability helps keep the code predictable and error-resistant. However, for **loops are typically used to change variables and mutate data**, which clashes with these two approaches.
+
+2. **`Side Effects`**: Functional programming aims to **minimize side effects**. Side effects occur when functions modify external state or depend on external state. for loops often involve modifying external state and can lead to various side effects during the iteration. This makes the code harder to predict and debug.
+
+4. **`Readability`**: Functional programming uses **higher-order functions** and a **declarative style** to enhance code readability. In contrast, **for loops are imperative and require detailed explanations of how a task is performed**. This results in functional programming having a more concise and readable code style.
+
+5. **`Parallelism and Optimization`**: Functional programming provides a structure that makes **parallelism and optimization easier**. Functional code consists of pure functions, making it easier to avoid concurrency issues. In contrast, for loops are imperative, which can make parallelism and optimization more challenging.
+
+Therefore, functional programming and for loops differ significantly in terms of code writing and maintenance approaches. Functional programming, especially in complex and error-prone programs, can offer a more useful approach due to its advantages.
+
