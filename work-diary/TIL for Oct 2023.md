@@ -51,3 +51,47 @@
 
 Therefore, functional programming and for loops differ significantly in terms of code writing and maintenance approaches. Functional programming, especially in complex and error-prone programs, can offer a more useful approach due to its advantages.
 
+
+# 2023-10-17
+## When never[] type is inferred in useState
+### Problem
+
+const [listItems, setListItems] = useState([]);
+
+useEffect(() => {
+    const totalItems = 10;
+    const generatedItems = Array.from({ length: totalItems }, (_, idx) => ({
+        label: `${idx + 1} year`, 
+        key: idx + 1,
+    }));
+    setListItems(generatedItems); // Error occurs, the argument of type '{ title: string; value: number; }[]' cannot be assigned to the parameter of type 'SetStateAction<never[]>'.
+}, []);
+
+
+### Cause
+- This error originates from a type mismatch in TypeScript. The discrepancy arises because the `setListItems function`, generated through the useState hook, **does not match the type of the totalItems** state variable.
+
+- To address this, **the argument for the setListItems function and the type of the totalItems state variable must align**. The error message indicates that it cannot be assigned to a parameter of type 'SetStateAction<never[]>'. This is because the argument type for the setListItems function is inferred as never[], but we are attempting to pass an array of type { label: string; key: number; }[].
+
+- **When utilizing useState([]), TypeScript infers an empty array as the initial state and deduces its type as never[]**. The `never[] type` represents an array that **cannot contain any elements.**
+
+- Subsequently, when calling the setListItems function, it tries to retain the totalItems state variable's type as never[]. However, since we aim to pass an array of { label: string; key: number; }[] type to the setListItems function, this results in a type mismatch error.
+
+### Solution
+1. Set the **initial state value correctly**. Explicitly specify the initial state value as an array type so that TypeScript can infer the correct type.
+```tsx
+const [totalItems, setListItems] = useState<{ label: string; key: number; }[]>([]);
+```
+
+2. Without explicitly setting the initial state value as { label: string; key: number; }[], **pass values of type { label: string; key: number; }[] to the setListItems function**.
+```tsx
+setListItems([{ label: '1 year', key: 1 }, { label: '2 years', key: 2 }, /* ... */]);
+```
+
+### Conclusion
+- Managing state in React with TypeScript can be challenging, especially when it comes to inferring the correct types. The aforementioned issues and solutions highlight the importance of being `explicit` about our data types, particularly when initializing state using the useState hook.
+  - By providing clear type annotations and ensuring that our state updates align with these specified types, we can not only avoid unexpected TypeScript errors but also create more predictable and type-safe React components. Always remember, the clearer our code's intentions are, the fewer bugs and issues we'll encounter in the long run.
+
+
+
+
