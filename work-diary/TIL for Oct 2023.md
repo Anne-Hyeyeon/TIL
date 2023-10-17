@@ -56,6 +56,7 @@ Therefore, functional programming and for loops differ significantly in terms of
 ## When never[] type is inferred in useState
 ### Problem
 
+```tsx
 const [listItems, setListItems] = useState([]);
 
 useEffect(() => {
@@ -66,7 +67,7 @@ useEffect(() => {
     }));
     setListItems(generatedItems); // Error occurs, the argument of type '{ title: string; value: number; }[]' cannot be assigned to the parameter of type 'SetStateAction<never[]>'.
 }, []);
-
+```
 
 ### Cause
 - This error originates from a type mismatch in TypeScript. The discrepancy arises because the `setListItems function`, generated through the useState hook, **does not match the type of the totalItems** state variable.
