@@ -136,3 +136,90 @@ It is not recommended to use for...in on arrays. As arrays might possess propert
 ### Conclusion
 In modern JavaScript and TypeScript environments, there's a trend towards employing libraries or features (e.g., spread operator, Object.assign()) that treat objects and arrays immutably. This leads to writing code that's more concise and safer. However, in specific situations, the for...in loop remains a valuable tool.
 
+
+
+# 2023-10-19
+
+## Ensuring React Hooks are Called at the Component Top Level
+
+### Situation
+#### Original Code
+```tsx
+useEffect(() => {
+    const priorSettingValue = useRef(currentSettingValue);
+    if (priorSettingValue.current === 0 && currentSettingValue !== 0) {
+      updateSetting({ key: 'backupIntervalKey', value: '0' });
+    }
+
+    priorSettingValue.current = currentSettingValue;
+  }, [currentSettingValue, updateSetting]);
+// Error : React Hook "useRef" cannot be called inside a callback. React Hooks must be called in a React function component or a custom React Hook function
+```
+- Error message: React Hook "useRef" cannot be called inside a callback. React Hooks must be called in a React function component or a custom React Hook function.
+
+#### Updated Code
+```tsx
+    const priorSettingValue = useRef(currentSettingValue);
+
+useEffect(() => {
+    if (priorSettingValue.current === 0 && currentSettingValue !== 0) {
+      updateSetting({ key: 'backupIntervalKey', value: '0' });
+    }
+
+    priorSettingValue.current = currentSettingValue;
+  }, [currentSettingValue, updateSetting]);
+```
+
+### Root of the Problem
+- In this code, the useRef hook was called **inside the useEffect**. However, one of React's hook rules is that **hooks can only be called at the top level of a component**. This means that hooks shouldn't be called inside **conditionals, loops, nested functions, etc.** Thus, the given code raised an error.
+
+- In the updated code, the useRef hook was called outside of useEffect, at the top level of the component, adhering to React's hook rules.
+
+### Calling Hooks Exclusively at the Component Top Level
+- When we say **"call hooks at the top level,"** it implies that hooks should be directly invoked **within the body of the function component** without being indirectly triggered by specific logic, conditionals, loops, or nested functions.
+#### Correct Usage:
+```jsx
+function MyComponent() {
+  const [count, setCount] = useState(0);  // Correct position
+  const value = useMemo(() => count * 2, [count]); // Correct position
+
+  return (
+    <div onClick={() => setCount(count + 1)}>
+      {count} - {value}
+    </div>
+  );
+}
+```
+
+#### Incorrect Usages:
+1. Calling inside a conditional:
+```jsx
+function MyComponent({ isLoaded }) {
+  if (isLoaded) {
+    const [data, setData] = useState(null);  // Incorrect position
+  }
+  // ...
+}
+```
+
+2. Calling inside a loop:
+```jsx
+function MyComponent({ items }) {
+  items.forEach(item => {
+    const [count, setCount] = useState(0);  // Incorrect position
+  });
+  // ...
+}
+```
+
+3. Calling within a nested function or event handler:
+```jsx
+function MyComponent() {
+  function handleClick() {
+    const [state, setState] = useState(false);  // Incorrect position
+    // ...
+  }
+  // ...
+}
+```
+These restrictions exist because React uses **the order of hook calls** to manage internal states and side effects appropriately. If hooks are called conditionally or within nested functions, React wouldn't be able to track the state of hooks correctly, leading to unpredictable behaviors.
