@@ -223,3 +223,108 @@ function MyComponent() {
 }
 ```
 These restrictions exist because React uses **the order of hook calls** to manage internal states and side effects appropriately. If hooks are called conditionally or within nested functions, React wouldn't be able to track the state of hooks correctly, leading to unpredictable behaviors.
+
+
+
+# 2023-10-24
+## Limitations Related to Dynamic Property Access in Type Inference
+
+## The Issue
+
+### Intent
+To craft a handler that alters the value of specific attributes in the dataset property.
+
+### Attempt and Error
+```ts
+const resetActiveProperty = (blueprint: Configuration) => {
+  const {
+    assetConfig: { item: reduxItem },
+  } = storage.retrieve();
+
+  if (!!reduxItem.activateRemote || blueprint['dataset']['activateRemote'] !== 1) {
+    let attribute: keyof typeof blueprint['dataset'];
+    for (attribute in blueprint['dataset']) {
+      if (attribute.includes('remote')) {
+        if (typeof blueprint['dataset'][attribute] === 'string') {
+          blueprint['dataset'][attribute] = '';  // Error: Type 'string' is not assignable to type 'never'.ts(2322)
+        } else if (typeof blueprint['dataset'][attribute] === 'number') {
+          blueprint['dataset'][attribute] = 0; // Error: Type 'number' is not assignable to type 'never'.ts(2322)
+        }
+      }
+    }
+  }
+};
+```
+## Rectification
+
+```ts
+const resetActiveProperty = (blueprint: Configuration) => {
+  const {
+    assetConfig: { item: reduxItem },
+  } = storage.retrieve();
+
+  if (!!reduxItem.activateRemote || blueprint['dataset']['activateRemote'] !== 1) {
+    let attribute: keyof typeof blueprint['dataset'];
+    for (attribute in blueprint['dataset']) {
+      if (attribute.includes('remote')) {
+        if (typeof blueprint['dataset'][attribute] === 'string') {
+          (blueprint['dataset'][attribute] as string) = '';
+        } else if (typeof blueprint['dataset'][attribute] === 'number') {
+          (blueprint['dataset'][attribute] as number) = 0;
+        }
+      }
+    }
+  }
+};
+
+```
+
+This kind of type mismatch in TypeScript often arises because of limitations related to type deduction.
+
+When retrieving properties actively using `attribute` in `blueprint['dataset'][attribute]`, TypeScript struggles to precisely deduce the type of this property. Using `keyof typeof blueprint['dataset']`, the possible values for `attribute` are all attribute keys of `blueprint['dataset']`. However, during execution, the actual value of `attribute` is active, and during compile phase, it's uncertain which property `attribute` retrieves.
+
+To resolve this, type assertion is employed to explicitly convey to TypeScript the type of that value. In the provided code, we resolved the issue using type assertions like `(blueprint['dataset'][attribute] as string) = ''`.
+
+## Why TypeScript Cannot Recognize the Retrieved Value of `attribute` at Compile Phase
+
+The type mechanism of TypeScript is crafted to verify the type integrity of code at compile phase, distinct from genuine runtime execution.
+
+At compile phase, the genuine value of `attribute` is unestablished. The `attribute` is determined at runtime, which remains uncertain until the software genuinely operates.
+
+For instance, think about the code:
+```ts
+let attribute: keyof typeof blueprint['dataset'];
+for (attribute in blueprint['dataset']) {
+    // ...
+}
+```
+
+The `for..in` cycle iterates through all attribute keys of the `blueprint['dataset']` object. At compile phase, it remains vague which attributes this cycle will iterate over, and at each iteration, what the value of `attribute` will be. Hence, TypeScript remains uncertain which property of `blueprint['dataset']` the `attribute` retrieves.
+
+To manage such active property retrieval, TypeScript turns to using the union (i.e., comprehensive set) of all potential attribute key types. As a result, the type deduced for `blueprint['dataset'][attribute]` is the union of all attribute value types of `blueprint['dataset']`.
+
+Execution phase checks like `typeof blueprint['dataset'][attribute] === 'string'` do not directly influence the type deduction at compile phase. Thus, in such situations, type assertions or other methodologies must be employed to explicitly specify the type.
+
+## Compile Phase vs. Execution Phase
+
+Compile phase and execution phase represent two distinct stages in programming and software operation. Each stage executes different tasks, and the primary distinctions between these environments are:
+
+1. **Compile Phase**:
+    
+    - **Definition**: The stage when the source script is transformed into machine or intermediary code by a compiler.
+    - **Tasks**: Syntax mismatch checking, type checking (especially in statically typed languages), code optimization, etc.
+    - **Issues**: Issues found at this stage are termed compile-phase issues. These mismatches are detected prior to the software running, and if present, the software doesn't compile.
+    - **Instance**: Compiling source script in languages like C++, Java, TypeScript.
+
+2. **Execution Phase**:
+
+- **Definition**: The stage when the software is genuinely operating. 
+- **Tasks**: The logic of the software gets executed, data is processed, and there's interaction with the user. 
+- **Issues**: Any error that arises during this phase is termed as a runtime error. Examples include division by zero, memory access violations, trying to access a non-existent file, etc. 
+- **Instance**: The execution of code in interpreted languages like Python and JavaScript.
+
+**Summary**:
+- The compile phase is the point where the code is compiled, and issues related to syntax or type mismatches are detected.
+- The runtime or execution phase is when the software is actively running, executing its logic, processing data, and interacting with the user.
+
+Differentiating between these two phases is crucial, especially when debugging, as the nature of the error and the way it's addressed can vary greatly based on the phase in which it occurs.
