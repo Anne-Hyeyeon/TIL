@@ -13,3 +13,37 @@
 4. **마이그레이션 프로젝트**: 기존의 자바스크립트 프로젝트를 타입스크립트로 전환하는 과정에서 모든 타입을 한 번에 정의하기 어려울 수 있습니다. 초기 단계에서 일시적으로 `any`를 사용하되, 점차적으로 구체적인 타입으로 교체해 나가야 합니다.
     
 `any` 타입은 타입스크립트의 안전망을 제거하므로, 코드의 안정성과 가독성을 떨어뜨릴 수 있습니다. 가능한 한 `any` 사용을 피하고, 필요한 경우에는 그 사용 이유를 명확히 주석으로 남겨 다른 개발자들이 이해할 수 있도록 하는 것이 좋습니다.
+
+# 2023-11-03
+## `!important` in CSS
+### Understanding `!important` in CSS
+
+The `!important` rule in CSS is employed to elevate the priority of a specific style declaration to the highest level. CSS, standing for "Cascading Style Sheets," embodies the principle of "Cascading," indicating that styles are applied according to a predefined hierarchy of importance. This hierarchy is influenced by several elements, such as selector specificity, the order in which styles are declared, and inheritance patterns. `!important` supersedes these conventional rules, asserting its marked declaration as the most crucial.
+
+```css
+p {
+    color: red !important;
+}
+p {
+    color: blue;
+}
+```
+
+In the scenario illustrated above, the text within the `<p>` tags would adopt a red hue, as the `!important` rule negates the subsequent declaration.
+
+### When is `!important` Necessary?
+
+1. **User-defined Styles**: For reasons pertaining to accessibility, certain users may need to enforce specific styles, such as a high-contrast mode.
+2. **Overriding Library Styles**: When attempting to alter styles instituted by third-party libraries or frameworks, the application of `!important` might become necessary to supplant preexisting styles.
+3. **Provisional Remedies**: During the developmental phase, quick fixes for styling complications in complex stylesheets might warrant the temporary use of `!important`.
+
+### The Pitfalls of Overusing `!important`
+
+1. **Maintenance Challenges**: The introduction of `!important` disrupts the intrinsic cascade of stylesheets, potentially leading to confusion during subsequent code modifications or updates.
+2. **Escalation of Specificity**: The use of `!important` in one style declaration may compel other developers to employ `!important` for similar properties, culminating in escalated code complexity.
+3. **Debugging Difficulties**: The presence of `!important` complicates the debugging process of styling issues. Pinpointing the source of unexpected styling behaviors becomes increasingly arduous.
+4. **Performance Implications**: An excessive reliance on `!important` rules can prolong the CSS processing time for browsers, thereby detrimentally impacting webpage performance.
+
+### Conclusion
+
+In essence, while `!important` can be a useful tool in certain contexts, its judicious application is recommended. Addressing styling challenges through a more systematic approach, such as leveraging CSS classes, IDs, inline styles, and understanding selector specificity, proves to be a more sustainable strategy in the long term.
