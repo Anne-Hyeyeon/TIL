@@ -14,11 +14,16 @@
     
 `any` 타입은 타입스크립트의 안전망을 제거하므로, 코드의 안정성과 가독성을 떨어뜨릴 수 있습니다. 가능한 한 `any` 사용을 피하고, 필요한 경우에는 그 사용 이유를 명확히 주석으로 남겨 다른 개발자들이 이해할 수 있도록 하는 것이 좋습니다.
 
+
+
 # 2023-11-03
 ## `!important` in CSS
 ### Understanding `!important` in CSS
 
-The `!important` rule in CSS is employed to elevate the priority of a specific style declaration to the highest level. CSS, standing for "Cascading Style Sheets," embodies the principle of "Cascading," indicating that styles are applied according to a predefined hierarchy of importance. This hierarchy is influenced by several elements, such as selector specificity, the order in which styles are declared, and inheritance patterns. `!important` supersedes these conventional rules, asserting its marked declaration as the most crucial.
+- The `!important` rule in CSS is employed to elevate the priority of a specific style declaration to the highest level.
+- CSS, standing for "Cascading Style Sheets," embodies the principle of "Cascading," indicating that styles are applied according to a predefined hierarchy of importance.
+- This hierarchy is influenced by several elements, such as selector specificity, the order in which styles are declared, and inheritance patterns.
+- `!important` supersedes these conventional rules, asserting its marked declaration as the most crucial.
 
 ```css
 p {
@@ -29,7 +34,7 @@ p {
 }
 ```
 
-In the scenario illustrated above, the text within the `<p>` tags would adopt a red hue, as the `!important` rule negates the subsequent declaration.
+- In the scenario illustrated above, the text within the `<p>` tags would adopt a red hue, as the `!important` rule negates the subsequent declaration.
 
 ### When is `!important` Necessary?
 
@@ -47,3 +52,40 @@ In the scenario illustrated above, the text within the `<p>` tags would adopt a 
 ### Conclusion
 
 In essence, while `!important` can be a useful tool in certain contexts, its judicious application is recommended. Addressing styling challenges through a more systematic approach, such as leveraging CSS classes, IDs, inline styles, and understanding selector specificity, proves to be a more sustainable strategy in the long term.
+
+
+# 2023-11-06
+## understanding `order` in CSS
+- The `order` property in CSS is used to **adjust the order of items within a Flexbox layout**.
+- By default, the child elements of a Flexbox container are laid out in the order they appear in the source code. However, the order property allows you to **change this order without altering the HTML structure or the DOM order**; it only affects the visual presentation.
+
+- The default value of the order property is 0, and it can take positive or negative numbers. Lower numbers will place items earlier in the visual layout. For example, an item with order: 1; will be positioned before an item with order: 2;.
+
+### Example
+```html
+<div class="container">
+  <div class="item">1</div>
+  <div class="item">2</div>
+  <div class="item">3</div>
+</div>
+```
+```css
+.container {
+  display: flex;
+}
+
+.item:nth-child(1) {
+  order: 2;
+}
+
+.item:nth-child(2) {
+  order: 3;
+}
+
+.item:nth-child(3) {
+  order: 1;
+}
+```
+- In the example above, the first item has order: 2; so it moves to the third position. The third item has order: 1;, so it moves to the first position. As a result, the order of items as they appear on the screen will be **3, 1, 2**.
+
+- The order property can be particularly useful in responsive design, helping to rearrange the order of content based on screen size or resolution.
