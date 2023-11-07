@@ -89,3 +89,47 @@ In essence, while `!important` can be a useful tool in certain contexts, its jud
 - In the example above, the first item has order: 2; so it moves to the third position. The third item has order: 1;, so it moves to the first position. As a result, the order of items as they appear on the screen will be **3, 1, 2**.
 
 - The order property can be particularly useful in responsive design, helping to rearrange the order of content based on screen size or resolution.
+
+# 2023-11-07
+## Understanding Real-time Object References in Console Logging
+
+To comprehend how the console log displays real-time references to objects, we must examine both the properties of objects in JavaScript and the functionality of the browser console.
+
+### Example of JavaScript Object References
+```js
+let myObject = { name: "ChatGPT", likes: "coding" };
+console.log(myObject); // Logs { name: "ChatGPT", likes: "coding" } to the console
+
+// Changing a property of the object
+myObject.name = "GPT-4";
+
+// When the console log is expanded, you can see the name property has been changed to "GPT-4".
+```
+
+In the code above, when we log `myObject`, the state of the object at that moment is printed to the console. However, if we alter the properties of the object after logging it, and then expand the logged object in the console, we can see the updated values.
+
+### How the Browser Console Operates
+
+1. **Initial Logging**: In the browser's developer tools, we log `myObject` to the console for the first time.
+
+```js
+console.log(myObject); // Logs { name: "ChatGPT", likes: "coding" } to the console
+```
+
+2. **Viewing the Object in the Console**: The object logged to the console is not immediately expanded, so its actual values are not visible yet.
+
+3. **Modifying the Object**: After logging, the object's `name` property is changed to "GPT-4".
+
+```js
+myObject.name = "GPT-4";
+```
+
+4. **Viewing Updated Values Upon Expansion**: Now, when we expand the initially logged object in the console, it shows the updated value "GPT-4" rather than the original value "ChatGPT". This is because the console records a "reference" to the object, not a "snapshot" of it.
+
+### The Meaning of Real-time References
+
+This behavior is due to the way JavaScript handles objects as "reference types." The object logged in the console represents a reference to the object stored in memory. Hence, when properties of this object are modified elsewhere in the code, those changes are reflected immediately in memory. The console references this memory address to represent the current state, so if the object has been altered after being logged, the console will reflect the updated state when expanded.
+
+### Considerations for Debugging
+
+This functionality of the console can cause confusion for developers when tracking the state of objects through logs, as the state of a logged object can change over time. Therefore, to accurately understand the state of an object, one might need to output new logs whenever changes are made, or take measures to maintain immutability, such as copying the object.
