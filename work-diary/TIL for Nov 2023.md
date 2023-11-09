@@ -133,3 +133,32 @@ This behavior is due to the way JavaScript handles objects as "reference types."
 ### Considerations for Debugging
 
 This functionality of the console can cause confusion for developers when tracking the state of objects through logs, as the state of a logged object can change over time. Therefore, to accurately understand the state of an object, one might need to output new logs whenever changes are made, or take measures to maintain immutability, such as copying the object.
+
+
+# 2023-11-08
+## Resolving Overwritten CSS Display Property Issues
+
+**The Situation:** I applied `display: flex;` to an HTML element, but when I checked the page, it was overridden with `display: block;`. This happened because two CSS selectors were trying to apply different `display` properties to the same element.
+
+```css
+.customDropdown .optionContent .optionItem {
+    display: flex;
+    /* other styles */
+}
+.settingsPriority .optionItem {
+    display: block;
+    /* other styles */
+}
+```
+
+**The Solution:** The second selector has higher specificity or comes later in the stylesheet, thus overriding `display: flex;`. To fix this, I tried the following methods:
+
+1. **Increasing Specificity:** Create a selector with higher specificity to reinforce the first rule.
+2. **Using `!important`:** Add `!important` to `display: flex;` to ensure this rule takes precedence. (However, be cautious as this can affect the readability and maintainability of your stylesheet.)
+3. **Re-evaluating HTML Structure:** Reassess the HTML markup to ensure selectors don't apply to the same element simultaneously.
+
+Eventually, I resolved the issue by increasing the specificity of the first selector. It allowed me to apply the desired styles and helped me realize the importance of understanding specificity in managing CSS complexity.
+
+**Lessons Learned:** In CSS, the order of precedence in applying styles is crucial. A good grasp of specificity can effectively solve style conflict issues. And while `!important` can be useful, it should be used sparingly.
+
+This simple experience enhanced my understanding of the intricacies of CSS. I plan to continue adding such insights to my TIL, so if you're interested in diving deeper into CSS, stay tuned for more!
