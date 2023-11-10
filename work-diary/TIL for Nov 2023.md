@@ -162,3 +162,55 @@ Eventually, I resolved the issue by increasing the specificity of the first sele
 **Lessons Learned:** In CSS, the order of precedence in applying styles is crucial. A good grasp of specificity can effectively solve style conflict issues. And while `!important` can be useful, it should be used sparingly.
 
 This simple experience enhanced my understanding of the intricacies of CSS. I plan to continue adding such insights to my TIL, so if you're interested in diving deeper into CSS, stay tuned for more!
+
+
+# 2023-11-10
+## Rest Parameter Syntax
+
+The "Rest Parameter" syntax in JavaScript and TypeScript is a useful feature that allows you to represent an indefinite number of arguments as an array. This is particularly useful when you want to handle multiple parameters in a function without specifying each one individually. 
+
+### Basic Concept:
+
+1. **Syntax**: Rest parameters are denoted by three dots (`...`) followed by the name of the array that will contain the rest of the parameters.
+2. **Usage**: They are used in function definitions. For instance, in a function `function sum(...numbers)`, `numbers` is an array containing all the passed arguments.
+
+### In Destructuring:
+
+In the context of object destructuring, as shown in your example, the rest parameter is used to gather the remaining (unassigned) properties of an object.
+
+### Example in Object Destructuring:
+
+```tsx
+type BasicData = {
+  assetImportance: string;
+  name: string;
+  age: number;
+  [key: string]: any; // Allows any number of additional properties
+};
+
+const extractData = ({ assetImportance, ...rest }: BasicData) => {
+  // 'rest' now contains all properties of BasicData except 'assetImportance'
+  return rest;
+};
+
+const data = {
+  assetImportance: 'High',
+  name: 'John',
+  age: 30,
+  country: 'USA'
+};
+
+const newData = extractData(data);
+// newData will be: { name: 'John', age: 30, country: 'USA' }
+
+```
+
+In this example, `extractData` function uses rest parameters to collect all properties of `BasicData` except `assetImportance` into a single object (`rest`), which it then returns.
+
+### Key Points:
+
+- **Order Matters**: The rest parameter must be the last in the destructuring pattern.
+- **Flexibility**: This syntax provides a flexible way to handle an object with varying numbers of properties.
+- **Clean and Readable**: Using rest parameters can lead to cleaner and more readable code, especially when dealing with multiple properties or optional properties.
+
+In summary, the rest parameter syntax in JavaScript and TypeScript is a versatile feature for handling multiple function arguments or object properties, making the code more adaptable and concise.
