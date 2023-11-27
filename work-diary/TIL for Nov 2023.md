@@ -214,3 +214,15 @@ In this example, `extractData` function uses rest parameters to collect all prop
 - **Clean and Readable**: Using rest parameters can lead to cleaner and more readable code, especially when dealing with multiple properties or optional properties.
 
 In summary, the rest parameter syntax in JavaScript and TypeScript is a versatile feature for handling multiple function arguments or object properties, making the code more adaptable and concise.
+
+
+
+# 2023-11-27
+## UI에서 자식 요소들의 렌더링이 다 끝났음을 확인할 수 있는 지표가 있을까?
+### 상황 설명
+- 리스트가 있다. 각 리스트에는 'expanded(확장)' 버튼을 통해 하위 요소를 볼 수 있는 기능이 있다.
+- 화면 오른쪽에는 '모두 펼쳐보기/모두 닫기'버튼이 있다.
+- '모두 펼쳐보기/닫기'는 말 그대로 하위 요소의 확장을 결정하는 버튼이다.
+- 특이사항은, '모두 펼쳐보기'값은 로컬스토리지에 저장된다는 것. '모두 펼쳐보기'상태일 때는 사용자가 다음에 들어올 때도 하위 요소가 모두 펼쳐져야 한다. 
+- 여기서 문제 🌟🌟 개발자는 모든 하위 요소가 확장되었을 때, 사용자에게 그것을 알려주는 알람 하나를 넣어주고 싶다. (ex. alert으로 '확장 완료!')
+- 그러기 위해서는 하위 요소들의 렌더링이 모두 끝났음을 확인하는 장치가 있어야 한다.
